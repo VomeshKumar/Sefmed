@@ -464,9 +464,11 @@ export function FirmVisitsPage() {
         actions={
           <div className="flex flex-wrap items-center gap-2">
             <RequirePermission permission={PERMISSIONS.VISIT_CREATE}>
-              <Button onClick={handleOpenPlan} className="gap-1.5 h-9">
-                <Plus className="h-4 w-4" />
-                <span>Plan Call</span>
+              <Button asChild className="gap-1.5 h-9">
+                <Link to="/visits/firm/add">
+                  <Plus className="h-4 w-4" />
+                  <span>Plan Call</span>
+                </Link>
               </Button>
             </RequirePermission>
             <Button variant="outline" size="sm" asChild className="h-9 gap-1 text-xs">

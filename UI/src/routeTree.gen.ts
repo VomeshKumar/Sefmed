@@ -67,10 +67,14 @@ import { Route as AuthenticatedExpenseDayWiseRouteImport } from './routes/_authe
 import { Route as AuthenticatedExpenseApprovalRouteImport } from './routes/_authenticated.expense.approval'
 import { Route as AuthenticatedCalendarLeavesRouteImport } from './routes/_authenticated.calendar.leaves'
 import { Route as AuthenticatedCalendarHolidaysRouteImport } from './routes/_authenticated.calendar.holidays'
+import { Route as AuthenticatedVisitsFirmAddRouteImport } from './routes/_authenticated.visits.firm_.add'
 import { Route as AuthenticatedVisitsFirmIdRouteImport } from './routes/_authenticated.visits.firm_.$id'
+import { Route as AuthenticatedVisitsDoctorAddRouteImport } from './routes/_authenticated.visits.doctor_.add'
 import { Route as AuthenticatedVisitsDoctorIdRouteImport } from './routes/_authenticated.visits.doctor_.$id'
 import { Route as AuthenticatedSalesOrdersIdRouteImport } from './routes/_authenticated.sales.orders_.$id'
+import { Route as AuthenticatedPeopleEmployeesAddRouteImport } from './routes/_authenticated.people.employees_.add'
 import { Route as AuthenticatedPeopleEmployeesIdRouteImport } from './routes/_authenticated.people.employees_.$id'
+import { Route as AuthenticatedPeopleDoctorsAddRouteImport } from './routes/_authenticated.people.doctors_.add'
 import { Route as AuthenticatedPeopleDoctorsIdRouteImport } from './routes/_authenticated.people.doctors_.$id'
 import { Route as AuthenticatedPeopleAdministratorsIdRouteImport } from './routes/_authenticated.people.administrators_.$id'
 import { Route as AuthenticatedExpenseListIdRouteImport } from './routes/_authenticated.expense.list_.$id'
@@ -411,10 +415,22 @@ const AuthenticatedCalendarHolidaysRoute =
     path: '/calendar/holidays',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedVisitsFirmAddRoute =
+  AuthenticatedVisitsFirmAddRouteImport.update({
+    id: '/visits/firm_/add',
+    path: '/visits/firm/add',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedVisitsFirmIdRoute =
   AuthenticatedVisitsFirmIdRouteImport.update({
     id: '/visits/firm_/$id',
     path: '/visits/firm/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedVisitsDoctorAddRoute =
+  AuthenticatedVisitsDoctorAddRouteImport.update({
+    id: '/visits/doctor_/add',
+    path: '/visits/doctor/add',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedVisitsDoctorIdRoute =
@@ -429,10 +445,22 @@ const AuthenticatedSalesOrdersIdRoute =
     path: '/sales/orders/$id',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedPeopleEmployeesAddRoute =
+  AuthenticatedPeopleEmployeesAddRouteImport.update({
+    id: '/people/employees_/add',
+    path: '/people/employees/add',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedPeopleEmployeesIdRoute =
   AuthenticatedPeopleEmployeesIdRouteImport.update({
     id: '/people/employees_/$id',
     path: '/people/employees/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedPeopleDoctorsAddRoute =
+  AuthenticatedPeopleDoctorsAddRouteImport.update({
+    id: '/people/doctors_/add',
+    path: '/people/doctors/add',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedPeopleDoctorsIdRoute =
@@ -515,10 +543,14 @@ export interface FileRoutesByFullPath {
   '/expense/list/$id': typeof AuthenticatedExpenseListIdRoute
   '/people/administrators/$id': typeof AuthenticatedPeopleAdministratorsIdRoute
   '/people/doctors/$id': typeof AuthenticatedPeopleDoctorsIdRoute
+  '/people/doctors/add': typeof AuthenticatedPeopleDoctorsAddRoute
   '/people/employees/$id': typeof AuthenticatedPeopleEmployeesIdRoute
+  '/people/employees/add': typeof AuthenticatedPeopleEmployeesAddRoute
   '/sales/orders/$id': typeof AuthenticatedSalesOrdersIdRoute
   '/visits/doctor/$id': typeof AuthenticatedVisitsDoctorIdRoute
+  '/visits/doctor/add': typeof AuthenticatedVisitsDoctorAddRoute
   '/visits/firm/$id': typeof AuthenticatedVisitsFirmIdRoute
+  '/visits/firm/add': typeof AuthenticatedVisitsFirmAddRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -580,10 +612,14 @@ export interface FileRoutesByTo {
   '/expense/list/$id': typeof AuthenticatedExpenseListIdRoute
   '/people/administrators/$id': typeof AuthenticatedPeopleAdministratorsIdRoute
   '/people/doctors/$id': typeof AuthenticatedPeopleDoctorsIdRoute
+  '/people/doctors/add': typeof AuthenticatedPeopleDoctorsAddRoute
   '/people/employees/$id': typeof AuthenticatedPeopleEmployeesIdRoute
+  '/people/employees/add': typeof AuthenticatedPeopleEmployeesAddRoute
   '/sales/orders/$id': typeof AuthenticatedSalesOrdersIdRoute
   '/visits/doctor/$id': typeof AuthenticatedVisitsDoctorIdRoute
+  '/visits/doctor/add': typeof AuthenticatedVisitsDoctorAddRoute
   '/visits/firm/$id': typeof AuthenticatedVisitsFirmIdRoute
+  '/visits/firm/add': typeof AuthenticatedVisitsFirmAddRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -648,10 +684,14 @@ export interface FileRoutesById {
   '/_authenticated/expense/list_/$id': typeof AuthenticatedExpenseListIdRoute
   '/_authenticated/people/administrators_/$id': typeof AuthenticatedPeopleAdministratorsIdRoute
   '/_authenticated/people/doctors_/$id': typeof AuthenticatedPeopleDoctorsIdRoute
+  '/_authenticated/people/doctors_/add': typeof AuthenticatedPeopleDoctorsAddRoute
   '/_authenticated/people/employees_/$id': typeof AuthenticatedPeopleEmployeesIdRoute
+  '/_authenticated/people/employees_/add': typeof AuthenticatedPeopleEmployeesAddRoute
   '/_authenticated/sales/orders_/$id': typeof AuthenticatedSalesOrdersIdRoute
   '/_authenticated/visits/doctor_/$id': typeof AuthenticatedVisitsDoctorIdRoute
+  '/_authenticated/visits/doctor_/add': typeof AuthenticatedVisitsDoctorAddRoute
   '/_authenticated/visits/firm_/$id': typeof AuthenticatedVisitsFirmIdRoute
+  '/_authenticated/visits/firm_/add': typeof AuthenticatedVisitsFirmAddRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -716,10 +756,14 @@ export interface FileRouteTypes {
     | '/expense/list/$id'
     | '/people/administrators/$id'
     | '/people/doctors/$id'
+    | '/people/doctors/add'
     | '/people/employees/$id'
+    | '/people/employees/add'
     | '/sales/orders/$id'
     | '/visits/doctor/$id'
+    | '/visits/doctor/add'
     | '/visits/firm/$id'
+    | '/visits/firm/add'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -781,10 +825,14 @@ export interface FileRouteTypes {
     | '/expense/list/$id'
     | '/people/administrators/$id'
     | '/people/doctors/$id'
+    | '/people/doctors/add'
     | '/people/employees/$id'
+    | '/people/employees/add'
     | '/sales/orders/$id'
     | '/visits/doctor/$id'
+    | '/visits/doctor/add'
     | '/visits/firm/$id'
+    | '/visits/firm/add'
   id:
     | '__root__'
     | '/'
@@ -848,10 +896,14 @@ export interface FileRouteTypes {
     | '/_authenticated/expense/list_/$id'
     | '/_authenticated/people/administrators_/$id'
     | '/_authenticated/people/doctors_/$id'
+    | '/_authenticated/people/doctors_/add'
     | '/_authenticated/people/employees_/$id'
+    | '/_authenticated/people/employees_/add'
     | '/_authenticated/sales/orders_/$id'
     | '/_authenticated/visits/doctor_/$id'
+    | '/_authenticated/visits/doctor_/add'
     | '/_authenticated/visits/firm_/$id'
+    | '/_authenticated/visits/firm_/add'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1268,11 +1320,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCalendarHolidaysRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/visits/firm_/add': {
+      id: '/_authenticated/visits/firm_/add'
+      path: '/visits/firm/add'
+      fullPath: '/visits/firm/add'
+      preLoaderRoute: typeof AuthenticatedVisitsFirmAddRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/visits/firm_/$id': {
       id: '/_authenticated/visits/firm_/$id'
       path: '/visits/firm/$id'
       fullPath: '/visits/firm/$id'
       preLoaderRoute: typeof AuthenticatedVisitsFirmIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/visits/doctor_/add': {
+      id: '/_authenticated/visits/doctor_/add'
+      path: '/visits/doctor/add'
+      fullPath: '/visits/doctor/add'
+      preLoaderRoute: typeof AuthenticatedVisitsDoctorAddRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/visits/doctor_/$id': {
@@ -1289,11 +1355,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSalesOrdersIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/people/employees_/add': {
+      id: '/_authenticated/people/employees_/add'
+      path: '/people/employees/add'
+      fullPath: '/people/employees/add'
+      preLoaderRoute: typeof AuthenticatedPeopleEmployeesAddRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/people/employees_/$id': {
       id: '/_authenticated/people/employees_/$id'
       path: '/people/employees/$id'
       fullPath: '/people/employees/$id'
       preLoaderRoute: typeof AuthenticatedPeopleEmployeesIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/people/doctors_/add': {
+      id: '/_authenticated/people/doctors_/add'
+      path: '/people/doctors/add'
+      fullPath: '/people/doctors/add'
+      preLoaderRoute: typeof AuthenticatedPeopleDoctorsAddRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/people/doctors_/$id': {
@@ -1395,10 +1475,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedExpenseListIdRoute: typeof AuthenticatedExpenseListIdRoute
   AuthenticatedPeopleAdministratorsIdRoute: typeof AuthenticatedPeopleAdministratorsIdRoute
   AuthenticatedPeopleDoctorsIdRoute: typeof AuthenticatedPeopleDoctorsIdRoute
+  AuthenticatedPeopleDoctorsAddRoute: typeof AuthenticatedPeopleDoctorsAddRoute
   AuthenticatedPeopleEmployeesIdRoute: typeof AuthenticatedPeopleEmployeesIdRoute
+  AuthenticatedPeopleEmployeesAddRoute: typeof AuthenticatedPeopleEmployeesAddRoute
   AuthenticatedSalesOrdersIdRoute: typeof AuthenticatedSalesOrdersIdRoute
   AuthenticatedVisitsDoctorIdRoute: typeof AuthenticatedVisitsDoctorIdRoute
+  AuthenticatedVisitsDoctorAddRoute: typeof AuthenticatedVisitsDoctorAddRoute
   AuthenticatedVisitsFirmIdRoute: typeof AuthenticatedVisitsFirmIdRoute
+  AuthenticatedVisitsFirmAddRoute: typeof AuthenticatedVisitsFirmAddRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -1463,10 +1547,14 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedPeopleAdministratorsIdRoute:
     AuthenticatedPeopleAdministratorsIdRoute,
   AuthenticatedPeopleDoctorsIdRoute: AuthenticatedPeopleDoctorsIdRoute,
+  AuthenticatedPeopleDoctorsAddRoute: AuthenticatedPeopleDoctorsAddRoute,
   AuthenticatedPeopleEmployeesIdRoute: AuthenticatedPeopleEmployeesIdRoute,
+  AuthenticatedPeopleEmployeesAddRoute: AuthenticatedPeopleEmployeesAddRoute,
   AuthenticatedSalesOrdersIdRoute: AuthenticatedSalesOrdersIdRoute,
   AuthenticatedVisitsDoctorIdRoute: AuthenticatedVisitsDoctorIdRoute,
+  AuthenticatedVisitsDoctorAddRoute: AuthenticatedVisitsDoctorAddRoute,
   AuthenticatedVisitsFirmIdRoute: AuthenticatedVisitsFirmIdRoute,
+  AuthenticatedVisitsFirmAddRoute: AuthenticatedVisitsFirmAddRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

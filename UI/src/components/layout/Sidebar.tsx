@@ -70,7 +70,7 @@ export function Sidebar() {
               {isOpen ? (
                 <div className="ml-7 mt-1 flex flex-col border-l pl-2">
                   {children.map((c) => {
-                    const cActive = location.pathname === c.to;
+                    const cActive = location.pathname === c.to || location.pathname.startsWith(c.to + "/");
                     const CIcon = c.icon;
                     return (
                       <Link

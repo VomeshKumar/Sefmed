@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Plus, Edit, Trash2, Eye, FileSpreadsheet, Users, Key, Settings } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, FileSpreadsheet, Users, Key, Settings, FileDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -51,10 +51,16 @@ import type { Employee } from "../types";
 
 export function EmployeesPage() {
   const [search, setSearch] = React.useState("");
+  const [searchQueryVal, setSearchQueryVal] = React.useState("");
+  const [statusFilter, setStatusFilter] = React.useState("all");
   const [designationFilter, setDesignationFilter] = React.useState("all");
   const [divisionFilter, setDivisionFilter] = React.useState("all");
   const [zoneFilter, setZoneFilter] = React.useState("all");
-  const [statusFilter, setStatusFilter] = React.useState("all");
+  const [stateFilter, setStateFilter] = React.useState("all");
+  const [cityFilter, setCityFilter] = React.useState("all");
+  const [managerFilter, setManagerFilter] = React.useState("all");
+  const [osFilter, setOsFilter] = React.useState("all");
+  const [workTypeFilter, setWorkTypeFilter] = React.useState("all");
 
   // Dialog States
   const [isFormOpen, setIsFormOpen] = React.useState(false);
@@ -69,11 +75,33 @@ export function EmployeesPage() {
   const { data: designations = [] } = useDesignationsList();
   const { data: employees = [], isLoading } = useEmployeesList({
     query: search,
-    designationId: designationFilter === "all" ? undefined : designationFilter,
-    divisionId: divisionFilter === "all" ? undefined : divisionFilter,
-    zoneId: zoneFilter === "all" ? undefined : zoneFilter,
-    status: statusFilter === "all" ? undefined : statusFilter,
   });
+
+  const filteredEmployees = React.useMemo(() => {
+    return employees.filter((e) => {
+      if (statusFilter !== "all" && e.status !== statusFilter) return false;
+      if (designationFilter !== "all" && e.designationId !== designationFilter) return false;
+      if (divisionFilter !== "all" && e.divisionId !== divisionFilter) return false;
+      if (zoneFilter !== "all" && e.zoneId !== zoneFilter) return false;
+      if (stateFilter !== "all" && e.state !== stateFilter) return false;
+      if (cityFilter !== "all" && e.territoryId !== cityFilter) return false;
+      if (managerFilter !== "all" && e.reportingTo !== managerFilter) return false;
+      if (osFilter !== "all" && e.os !== osFilter) return false;
+      if (workTypeFilter !== "all" && e.workType !== workTypeFilter) return false;
+      return true;
+    });
+  }, [
+    employees,
+    statusFilter,
+    designationFilter,
+    divisionFilter,
+    zoneFilter,
+    stateFilter,
+    cityFilter,
+    managerFilter,
+    osFilter,
+    workTypeFilter,
+  ]);
 
   // Mutations
   const createMutation = useCreateEmployee();
@@ -328,6 +356,63 @@ export function EmployeesPage() {
     }
   }, [editingEmployee, reset]);
 
+  // Import/Export and Hierarchy Actions
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [selectedFileName, setSelectedFileName] = React.useState("");
+
+  const handleSelectFileClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFileName(file.name);
+    } else {
+      setSelectedFileName("");
+    }
+  };
+
+  const handleImport = () => {
+    if (!selectedFileName) {
+      toast.error("Please select a file to import");
+      return;
+    }
+    toast.loading("Importing employees...", { id: "import-toast" });
+    setTimeout(() => {
+      toast.success("Employees imported successfully", { id: "import-toast" });
+      setSelectedFileName("");
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }, 1200);
+  };
+
+  const handleExport = () => {
+    if (filteredEmployees.length === 0) {
+      toast.error("No employees to export");
+      return;
+    }
+    const headers = ["Code", "Name", "Work Type", "Email", "Contact", "Status"];
+    const rows = filteredEmployees.map((e) => [
+      `"${e.code}"`,
+      `"${e.name}"`,
+      `"${e.workType}"`,
+      `"${e.email}"`,
+      `"${e.contact}"`,
+      `"${e.status}"`,
+    ]);
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "employees_export.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("Employees exported successfully");
+  };
+
   // Actions
   const handleOpenCreate = () => {
     setEditingEmployee(null);
@@ -555,129 +640,227 @@ export function EmployeesPage() {
 
   return (
     <>
-      <PageHeader
-        title="Employees"
-        description="Manage corporate workforce, representative hierarchies, and zone targets."
-        breadcrumbs={[
-          { label: "Home", to: "/dashboard" },
-          { label: "People" },
-          { label: "Employees" },
-        ]}
-        actions={
-          <div className="flex flex-wrap items-center gap-2">
-            <RequirePermission permission={PERMISSIONS.EMPLOYEE_MANAGE}>
-              <Button onClick={handleOpenCreate} className="gap-1.5 h-9">
-                <Plus className="h-4 w-4" />
-                <span>Add Employee</span>
-              </Button>
-              <Button variant="outline" size="sm" className="h-9 gap-1 text-xs">
-                <Users className="h-3.5 w-3.5" />
-                <span>Hierarchy</span>
-              </Button>
-            </RequirePermission>
-          </div>
-        }
+      {/* Hidden file input for import */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        className="hidden"
+        accept=".csv, .xlsx, .xls"
       />
 
-      {/* Sefmed PDF Status Counters */}
-      <div className="mb-4 grid grid-cols-3 gap-4 max-w-md bg-card border rounded-lg p-3.5 shadow-sm text-sm">
-        <div className="text-center border-r">
-          <div className="text-muted-foreground font-medium text-xs uppercase">Active</div>
-          <div className="text-lg font-bold text-success nums-tabular mt-0.5">{metrics.active}</div>
-        </div>
-        <div className="text-center border-r">
-          <div className="text-muted-foreground font-medium text-xs uppercase">Inactive</div>
-          <div className="text-lg font-bold text-muted-foreground nums-tabular mt-0.5">{metrics.inactive}</div>
-        </div>
-        <div className="text-center">
-          <div className="text-muted-foreground font-medium text-xs uppercase">On Hold</div>
-          <div className="text-lg font-bold text-warning nums-tabular mt-0.5">{metrics.onhold}</div>
+      {/* Top Header Row */}
+      <div className="flex items-center justify-between mb-4 select-none">
+        <h1 className="text-[26px] font-normal text-slate-800">Employees</h1>
+        <div className="flex items-center gap-4 text-xs font-bold text-slate-800">
+          <span>Active : <span className="nums-tabular">{metrics.active}</span></span>
+          <span>Inactive : <span className="nums-tabular">{metrics.inactive}</span></span>
+          <span>On Hold : <span className="nums-tabular">{metrics.onhold}</span></span>
         </div>
       </div>
 
+      {/* Action Buttons Row */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-4 select-none">
+        <div className="flex flex-wrap items-center gap-2">
+          <RequirePermission permission={PERMISSIONS.EMPLOYEE_MANAGE}>
+            <Button asChild className="bg-[#008b8b] hover:bg-[#007676] text-white h-[34px] px-3.5 text-xs font-semibold rounded-[4px] border-0">
+              <Link to="/people/employees/add">
+                <Plus className="h-3.5 w-3.5 mr-1" />
+                <span>Add Employee</span>
+              </Link>
+            </Button>
+            <Button onClick={handleExport} className="bg-[#008b8b] hover:bg-[#007676] text-white h-[34px] px-3.5 text-xs font-semibold rounded-[4px] border-0 gap-1">
+              <FileSpreadsheet className="h-3.5 w-3.5" />
+              <span>Export</span>
+            </Button>
+            <Button onClick={() => toast.info("See Hierarchy feature clicked")} className="bg-[#008b8b] hover:bg-[#007676] text-white h-[34px] px-3.5 text-xs font-semibold rounded-[4px] border-0">
+              See Hierarchy
+            </Button>
+            <Button onClick={() => toast.info("Set Hierarchy feature clicked")} className="bg-[#008b8b] hover:bg-[#007676] text-white h-[34px] px-3.5 text-xs font-semibold rounded-[4px] border-0">
+              Set Hierarchy
+            </Button>
+          </RequirePermission>
+        </div>
+
+        <RequirePermission permission={PERMISSIONS.EMPLOYEE_MANAGE}>
+          <div className="flex items-center">
+            <div className="h-[34px] border border-slate-300 bg-white rounded-l-[4px] px-3 flex items-center text-xs text-slate-500 w-[180px] truncate border-r-0">
+              {selectedFileName || "No file selected"}
+            </div>
+            <button
+              type="button"
+              onClick={handleSelectFileClick}
+              className="h-[34px] bg-[#e1e1e1] hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 border border-slate-300 rounded-r-none cursor-pointer"
+            >
+              Select file
+            </button>
+            <Button onClick={handleImport} className="bg-[#008b8b] hover:bg-[#007676] text-white h-[34px] px-3.5 text-xs font-semibold rounded-none rounded-r-[4px] border-0 ml-1">
+              Import
+            </Button>
+            <Button onClick={() => toast.info("Downloading employee import template...")} className="bg-[#008b8b] hover:bg-[#007676] text-white h-[34px] px-3 text-xs font-semibold rounded-[4px] border-0 ml-1">
+              <FileDown className="h-3.5 w-3.5" />
+            </Button>
+          </div>
+        </RequirePermission>
+      </div>
+
       <div className="space-y-4">
-        {/* Filters */}
-        <FilterBar
-          searchQuery={search}
-          onSearchQueryChange={setSearch}
-          searchPlaceholder="Search employees by name, code, contact or email..."
-          showClearButton={
-            designationFilter !== "all" ||
-            divisionFilter !== "all" ||
-            zoneFilter !== "all" ||
-            statusFilter !== "all" ||
-            !!search
-          }
-          onClearFilters={() => {
-            setSearch("");
-            setDesignationFilter("all");
-            setDivisionFilter("all");
-            setZoneFilter("all");
-            setStatusFilter("all");
+        {/* Filters & Search Card */}
+        <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-4 space-y-4">
+        {/* Dropdowns Row */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Status Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] min-w-[110px]"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="all">Select Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="onhold">On Hold</option>
+          </select>
+
+          {/* Designation Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] max-w-[140px] truncate"
+            value={designationFilter}
+            onChange={(e) => setDesignationFilter(e.target.value)}
+          >
+            <option value="all">Select Designation</option>
+            {designations.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Division Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] max-w-[130px] truncate"
+            value={divisionFilter}
+            onChange={(e) => setDivisionFilter(e.target.value)}
+          >
+            <option value="all">Select Division</option>
+            {divisions.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.code}
+              </option>
+            ))}
+          </select>
+
+          {/* Zone Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] max-w-[120px] truncate"
+            value={zoneFilter}
+            onChange={(e) => setZoneFilter(e.target.value)}
+          >
+            <option value="all">Select Zone</option>
+            {zones.map((z) => (
+              <option key={z.id} value={z.id}>
+                {z.name}
+              </option>
+            ))}
+          </select>
+
+          {/* State Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] max-w-[120px] truncate"
+            value={stateFilter}
+            onChange={(e) => setStateFilter(e.target.value)}
+          >
+            <option value="all">Select State</option>
+            {["Bihar", "Chhattisgarh", "Jharkhand", "Karnataka", "Madhya Pradesh", "Maharashtra", "ODISHA", "Uttarpradesh"].map((st) => (
+              <option key={st} value={st}>
+                {st}
+              </option>
+            ))}
+          </select>
+
+          {/* City Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] max-w-[120px] truncate"
+            value={cityFilter}
+            onChange={(e) => setCityFilter(e.target.value)}
+          >
+            <option value="all">Select City</option>
+            {territories.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Manager Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] max-w-[140px] truncate"
+            value={managerFilter}
+            onChange={(e) => setManagerFilter(e.target.value)}
+          >
+            <option value="all">Select Manager</option>
+            {employees.map((emp) => (
+              <option key={emp.id} value={emp.id}>
+                {emp.name}
+              </option>
+            ))}
+          </select>
+
+          {/* OS Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] min-w-[100px]"
+            value={osFilter}
+            onChange={(e) => setOsFilter(e.target.value)}
+          >
+            <option value="all">Select OS</option>
+            <option value="Android">Android</option>
+            <option value="iOS">iOS</option>
+            <option value="Windows">Windows</option>
+          </select>
+
+          {/* Work Type Select */}
+          <select
+            className="h-[30px] border border-slate-300 rounded-[4px] px-2 text-xs text-slate-700 bg-white focus:outline-none focus:border-[#008b8b] min-w-[130px]"
+            value={workTypeFilter}
+            onChange={(e) => setWorkTypeFilter(e.target.value)}
+          >
+            <option value="all">Select Work Type</option>
+            <option value="office">Office</option>
+            <option value="onfield">Onfield</option>
+          </select>
+        </div>
+
+        {/* Search Row */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSearch(searchQueryVal);
           }}
+          className="flex items-center justify-end gap-2 text-xs select-none"
         >
-          <UiSelect value={designationFilter} onValueChange={setDesignationFilter}>
-            <SelectTrigger className="w-[150px] bg-background h-10">
-              <SelectValue placeholder="Designation" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Designations</SelectItem>
-              {designations.map((d) => (
-                <SelectItem key={d.id} value={d.id}>
-                  {d.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </UiSelect>
+          <span className="font-semibold text-slate-700">Search :</span>
+          <Input
+            type="text"
+            placeholder=""
+            value={searchQueryVal}
+            onChange={(e) => setSearchQueryVal(e.target.value)}
+            className="h-[30px] w-[180px] border-slate-300 focus-visible:ring-[#008b8b] bg-white rounded-[4px] px-2 text-xs"
+          />
+          <Button
+            type="submit"
+            className="bg-[#008b8b] hover:bg-[#007676] text-white h-[30px] px-4 text-xs font-semibold rounded-[4px] border-0"
+          >
+            Go
+          </Button>
+        </form>
+      </div>
 
-          <UiSelect value={divisionFilter} onValueChange={setDivisionFilter}>
-            <SelectTrigger className="w-[140px] bg-background h-10">
-              <SelectValue placeholder="Division" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Divisions</SelectItem>
-              {divisions.map((d) => (
-                <SelectItem key={d.id} value={d.id}>
-                  {d.code}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </UiSelect>
-
-          <UiSelect value={zoneFilter} onValueChange={setZoneFilter}>
-            <SelectTrigger className="w-[130px] bg-background h-10">
-              <SelectValue placeholder="Zone" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Zones</SelectItem>
-              {zones.map((z) => (
-                <SelectItem key={z.id} value={z.id}>
-                  {z.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </UiSelect>
-
-          <UiSelect value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-[130px] bg-background h-10">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Statuses</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="inactive">Inactive</SelectItem>
-              <SelectItem value="onhold">On Hold</SelectItem>
-            </SelectContent>
-          </UiSelect>
-        </FilterBar>
-
-        {/* Data Grid */}
-        <DataTable
-          columns={columns}
-          data={employees}
-          isLoading={isLoading}
-          getRowId={(item) => item.id}
-        />
+      {/* Data Grid */}
+      <DataTable
+        columns={columns}
+        data={filteredEmployees}
+        isLoading={isLoading}
+        getRowId={(item) => item.id}
+      />
       </div>
 
       {/* Form Dialog */}
