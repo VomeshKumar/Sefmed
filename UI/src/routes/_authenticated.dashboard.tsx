@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Activity, CheckCircle2, Receipt, Stethoscope } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { KpiCard } from "@/components/data/KpiCard";
@@ -7,6 +7,21 @@ import { EmptyState } from "@/components/data/EmptyState";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — SEFMED CRM" }] }),
+  beforeLoad: () => {
+    const userStr = localStorage.getItem("user");
+    if (!userStr) throw redirect({ to: "/login" });
+    
+    let user;
+    try {
+      user = JSON.parse(userStr);
+    } catch (e) {
+      throw redirect({ to: "/login" });
+    }
+    
+    if (user.role !== "admin") {
+      throw redirect({ to: "/reports" });
+    }
+  },
   component: Dashboard,
 });
 
