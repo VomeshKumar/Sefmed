@@ -222,24 +222,44 @@ export function ReportsHubPage() {
                     No matching reports
                   </div>
                 ) : (
-                  cat.reports.map((report) => (
-                    <Link
-                      key={report.id}
-                      to="/reports/builder"
-                      search={{
-                        module: report.module,
-                        templateName: report.title,
-                      }}
-                      className="block group bg-card hover:bg-muted/10 border hover:border-primary hover:shadow-xs p-3.5 rounded-lg transition-all duration-150 cursor-pointer"
-                    >
-                      <div className="font-semibold text-xs text-foreground group-hover:text-primary transition-colors mb-1">
-                        {report.title}
-                      </div>
-                      <div className="text-[10px] text-muted-foreground leading-relaxed">
-                        {report.description}
-                      </div>
-                    </Link>
-                  ))
+                  cat.reports.map((report) => {
+                    const isCallReport = report.title === "Call Report";
+                    const isHospitalCallReport = report.title === "Hospital Call Report";
+                    const isPobReport = report.title === "POB Report";
+                    const isPobCallReport = report.title === "Call Report With POB";
+                    return (
+                      <Link
+                        key={report.id}
+                        to={
+                          isCallReport
+                            ? "/reports/dailycallreports"
+                            : isHospitalCallReport
+                            ? "/reports/hospitalcallreports"
+                            : isPobReport
+                            ? "/reports/pobreports"
+                            : isPobCallReport
+                            ? "/reports/callreportswithpob"
+                            : "/reports/builder"
+                        }
+                        search={
+                          (isCallReport || isHospitalCallReport || isPobReport || isPobCallReport)
+                            ? undefined
+                            : {
+                                module: report.module,
+                                templateName: report.title,
+                              }
+                        }
+                        className="block group bg-card hover:bg-muted/10 border hover:border-primary hover:shadow-xs p-3.5 rounded-lg transition-all duration-150 cursor-pointer"
+                      >
+                        <div className="font-semibold text-xs text-foreground group-hover:text-primary transition-colors mb-1">
+                          {report.title}
+                        </div>
+                        <div className="text-[10px] text-muted-foreground leading-relaxed">
+                          {report.description}
+                        </div>
+                      </Link>
+                    );
+                  })
                 )}
               </div>
             </div>

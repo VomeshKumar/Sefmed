@@ -97,7 +97,7 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       },
       {
         id: "work-13",
-        title: "MCL Report",
+        title: "MSL Report",
         description: "Report showing compliance of representative (visits to employees) for all assigned doctors.",
         module: "visits",
       },
@@ -128,13 +128,13 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       {
         id: "work-18",
         title: "Activity Report",
-        description: "A report showing the information of the employee, such as total working days, joint working value, retail orders & brand presentation.",
+        description: "A report showing the information of the employees, such as total working days, total leaves taken, total doctors & firms calls",
         module: "employees",
       },
       {
         id: "work-19",
         title: "Presentation Report",
-        description: "A report showing the presentation history of e-detailing/presentation against doctors during a period.",
+        description: "A report showing the presentation information of the employee against doctors during a period.",
         module: "doctors",
       },
       {
@@ -152,7 +152,7 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       {
         id: "work-22",
         title: "Sales Trend Report",
-        description: "A report showing the information about the product, and how much substitution is ordered against doctors during a period.",
+        description: "A report showing the information about the product, and how much unit/value is ordered.",
         module: "orders",
       },
       {
@@ -170,13 +170,13 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       {
         id: "work-25",
         title: "ROI Report",
-        description: "A report showing the information about the product, and how much substitution is ordered against doctors during a period.",
+        description: "A report showing the information about the product, and how much unit/value is ordered against doctors during a month.",
         module: "orders",
       },
       {
         id: "work-26",
         title: "Sample Distribution Report With Opening And Closing Quantity",
-        description: "This report gives the details of sample distributed by employee to the doctor with Opening & Closing Quantity.",
+        description: "This report gives the idea of sample distributed by employee to the doctor with Opening And Closing Quantity.",
         module: "employees",
       },
       {
@@ -283,7 +283,7 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       },
       {
         id: "prod-16",
-        title: "Product And Category Wise Sales Report",
+        title: "Product And Category Wise Sales Report (Product Group Wise)",
         description: "Report of showing product wise records and details on monthly basis.",
         module: "orders",
       },
@@ -337,13 +337,13 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       },
       {
         id: "prod-25",
-        title: "Party / Chemist Wise Sales Report",
+        title: "Party / Item Wise Sales Report",
         description: "This report gives the detail of party / chemist sales summary on a monthly basis.",
         module: "orders",
       },
       {
         id: "prod-26",
-        title: "Consolidation Report (Month Wise)",
+        title: "Consolidate Report (Month Wise)",
         description: "Report showing details of employee summary on a monthly basis.",
         module: "employees",
       },
@@ -423,37 +423,37 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       {
         id: "logs-09",
         title: "Quiz Report",
-        description: "Report showing performance of employee in quiz program.",
+        description: "Report showing performace of employee in OKEP program.",
         module: "employees",
       },
       {
         id: "logs-10",
         title: "Question Report",
-        description: "Report showing each question was answered correctly by how many employees.",
+        description: "Report showing each question was answered correct by how many employees.",
         module: "employees",
       },
       {
         id: "logs-11",
-        title: "Daily Summary Report",
-        description: "This agent gives the list of the daily summary reports of the client on monthly basis.",
+        title: "Data Summary Report",
+        description: "This report gives the information of the data summary against the client on month basis.",
         module: "employees",
       },
       {
         id: "logs-12",
         title: "Attendance and Leave Report",
-        description: "A report showing the status of leaves of the employees and also showing the leaves details for a selected period.",
+        description: "A report showing the status of leaves of all the employees and also showing the leaves detail for a selected period.",
         module: "leaves",
       },
       {
         id: "logs-13",
         title: "Hospital Wise Referral Report",
-        description: "Report showing call records and details on referral basis.",
+        description: "Report showing call records and details on selected date basis.",
         module: "visits",
       },
       {
         id: "logs-14",
         title: "Employee Attendance Report",
-        description: "Report showing details of employee attendance data.",
+        description: "Report showing detailes of employee attendance data.",
         module: "employees",
       },
     ],
@@ -483,7 +483,7 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       },
       {
         id: "exp-04",
-        title: "Expense Credit/Submitted Reports",
+        title: "Expense Draft/Submitted Reports",
         description: "A report showing expense of employees with status of approved, submitted & drafted.",
         module: "expenses",
       },
@@ -496,19 +496,19 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       {
         id: "exp-06",
         title: "Deviation Report",
-        description: "A report showing the information of the members of working days and number of days he/she has declared their tourplan.",
+        description: "A report showing the information of the number of working days and number of days he/she has deviated their tourplan",
         module: "visits",
       },
       {
         id: "exp-07",
         title: "Tour Plan Status Report",
-        description: "A report showing tour plan status (e.g. approved, submitted) of employee during month.",
+        description: "A report showing the tour plan status during a month.",
         module: "visits",
       },
       {
         id: "exp-08",
-        title: "Expense Statement/Monthly Tour Plan Report",
-        description: "A report showing the information of the approved expense of the employee with designation & location type.",
+        title: "Expense statement/Monthly tour plan report",
+        description: "A report showing the information of the approved expense of the employee along with the working & leave information",
         module: "expenses",
       },
       {
@@ -532,7 +532,7 @@ export const PREPACKAGED_REPORTS: PrepackagedCategory[] = [
       {
         id: "exp-12",
         title: "Tourplan VS Actual Work Report",
-        description: "Report showing tourplan and diameter wise visit and pob.",
+        description: "Report showing tourplan and deviation wise visit and pob.",
         module: "visits",
       },
     ],

@@ -20,6 +20,7 @@ import {
   UserCog,
   Target,
   Wrench,
+  Folder,
   type LucideIcon,
 } from "lucide-react";
 import { PERMISSIONS, type Permission } from "@/lib/rbac/permissions";
@@ -136,6 +137,11 @@ export const NAV: NavItem[] = [
     ],
   },
   {
+    label: "Files",
+    to: "/modules/files",
+    icon: Folder,
+  },
+  {
     label: "Reports",
     to: "/reports",
     icon: BarChart3,
@@ -145,14 +151,6 @@ export const NAV: NavItem[] = [
       PERMISSIONS.REPORT_VISIT_VIEW,
       PERMISSIONS.REPORT_EXPENSE_VIEW,
       PERMISSIONS.REPORT_EMPLOYEE_VIEW,
-    ],
-    children: [
-      { label: "Leave Reports", to: "/reports/leave", permission: PERMISSIONS.REPORT_LEAVE_VIEW },
-      { label: "Sales Reports", to: "/reports/sales", permission: PERMISSIONS.REPORT_SALES_VIEW },
-      { label: "Visit Reports", to: "/reports/visit", permission: PERMISSIONS.REPORT_VISIT_VIEW },
-      { label: "Expense Reports", to: "/reports/expense", permission: PERMISSIONS.REPORT_EXPENSE_VIEW },
-      { label: "Employee Reports", to: "/reports/employee", permission: PERMISSIONS.REPORT_EMPLOYEE_VIEW },
-      { label: "Report Builder", to: "/reports/builder", permission: PERMISSIONS.REPORT_BUILDER_USE },
     ],
   },
   {

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FeatureStub } from "@/components/layout/FeatureStub";
+import { StockMonthMaintenancePage } from "@/features/sales/pages/StockMonthMaintenancePage";
 
 export const Route = createFileRoute("/_authenticated/sales/stock-month-maintenance")({
   head: () => ({ meta: [{ title: "Stock Month Maintenance — SEFMED CRM" }] }),
@@ -7,11 +7,6 @@ export const Route = createFileRoute("/_authenticated/sales/stock-month-maintena
 });
 
 function Page() {
-  return (
-    <FeatureStub
-      title="Stock Month Maintenance"
-      description="Stock closure schedules and month-wise maintenance options."
-      module="Sales Management"
-    />
-  );
+  return <StockMonthMaintenancePage />;
 }
+

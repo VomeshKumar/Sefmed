@@ -156,14 +156,20 @@ export function AdministratorsPage() {
 
   const onSubmit = async (values: AdministratorFormValues) => {
     try {
+      const dataToSave = {
+        ...values,
+        city: values.city || "",
+        divisionId: values.divisionId || "",
+        zoneId: values.zoneId || "",
+      };
       if (editingAdmin) {
         await updateMutation.mutateAsync({
           id: editingAdmin.id,
-          data: values,
+          data: dataToSave,
         });
         toast.success("Administrator updated successfully");
       } else {
-        await createMutation.mutateAsync(values);
+        await createMutation.mutateAsync(dataToSave);
         toast.success("Administrator created successfully");
       }
       setIsFormOpen(false);

@@ -180,14 +180,25 @@ export function DoctorsPage() {
 
   const onSubmit = async (values: DoctorFormValues) => {
     try {
+      const dataToSave = {
+        ...values,
+        registrationNumber: values.registrationNumber || "",
+        doctorCode: values.doctorCode || "",
+        hospitalName: values.hospitalName || "",
+        clinicAddress: values.clinicAddress || "",
+        speciality: values.speciality || "",
+        category: values.category || "",
+        assignedEmployeeId: values.assignedEmployeeId || "",
+        contact: values.contact || "",
+      };
       if (editingDoctor) {
         await updateMutation.mutateAsync({
           id: editingDoctor.id,
-          data: values,
+          data: dataToSave,
         });
         toast.success("Doctor updated successfully");
       } else {
-        await createMutation.mutateAsync(values);
+        await createMutation.mutateAsync(dataToSave);
         toast.success("Doctor created successfully");
       }
       setIsFormOpen(false);

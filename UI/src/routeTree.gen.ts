@@ -35,9 +35,13 @@ import { Route as AuthenticatedSalesFirmMonthlyRouteImport } from './routes/_aut
 import { Route as AuthenticatedSalesAnalyticsRouteImport } from './routes/_authenticated.sales.analytics'
 import { Route as AuthenticatedReportsVisitRouteImport } from './routes/_authenticated.reports.visit'
 import { Route as AuthenticatedReportsSalesRouteImport } from './routes/_authenticated.reports.sales'
+import { Route as AuthenticatedReportsPobreportsRouteImport } from './routes/_authenticated.reports.pobreports'
 import { Route as AuthenticatedReportsLeaveRouteImport } from './routes/_authenticated.reports.leave'
+import { Route as AuthenticatedReportsHospitalcallreportsRouteImport } from './routes/_authenticated.reports.hospitalcallreports'
 import { Route as AuthenticatedReportsExpenseRouteImport } from './routes/_authenticated.reports.expense'
 import { Route as AuthenticatedReportsEmployeeRouteImport } from './routes/_authenticated.reports.employee'
+import { Route as AuthenticatedReportsDailycallreportsRouteImport } from './routes/_authenticated.reports.dailycallreports'
+import { Route as AuthenticatedReportsCallreportswithpobRouteImport } from './routes/_authenticated.reports.callreportswithpob'
 import { Route as AuthenticatedReportsBuilderRouteImport } from './routes/_authenticated.reports.builder'
 import { Route as AuthenticatedPeopleEmployeesRouteImport } from './routes/_authenticated.people.employees'
 import { Route as AuthenticatedPeopleDoctorsRouteImport } from './routes/_authenticated.people.doctors'
@@ -225,10 +229,22 @@ const AuthenticatedReportsSalesRoute =
     path: '/sales',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
+const AuthenticatedReportsPobreportsRoute =
+  AuthenticatedReportsPobreportsRouteImport.update({
+    id: '/pobreports',
+    path: '/pobreports',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
 const AuthenticatedReportsLeaveRoute =
   AuthenticatedReportsLeaveRouteImport.update({
     id: '/leave',
     path: '/leave',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsHospitalcallreportsRoute =
+  AuthenticatedReportsHospitalcallreportsRouteImport.update({
+    id: '/hospitalcallreports',
+    path: '/hospitalcallreports',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedReportsExpenseRoute =
@@ -241,6 +257,18 @@ const AuthenticatedReportsEmployeeRoute =
   AuthenticatedReportsEmployeeRouteImport.update({
     id: '/employee',
     path: '/employee',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsDailycallreportsRoute =
+  AuthenticatedReportsDailycallreportsRouteImport.update({
+    id: '/dailycallreports',
+    path: '/dailycallreports',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsCallreportswithpobRoute =
+  AuthenticatedReportsCallreportswithpobRouteImport.update({
+    id: '/callreportswithpob',
+    path: '/callreportswithpob',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedReportsBuilderRoute =
@@ -520,9 +548,13 @@ export interface FileRoutesByFullPath {
   '/people/doctors': typeof AuthenticatedPeopleDoctorsRoute
   '/people/employees': typeof AuthenticatedPeopleEmployeesRoute
   '/reports/builder': typeof AuthenticatedReportsBuilderRoute
+  '/reports/callreportswithpob': typeof AuthenticatedReportsCallreportswithpobRoute
+  '/reports/dailycallreports': typeof AuthenticatedReportsDailycallreportsRoute
   '/reports/employee': typeof AuthenticatedReportsEmployeeRoute
   '/reports/expense': typeof AuthenticatedReportsExpenseRoute
+  '/reports/hospitalcallreports': typeof AuthenticatedReportsHospitalcallreportsRoute
   '/reports/leave': typeof AuthenticatedReportsLeaveRoute
+  '/reports/pobreports': typeof AuthenticatedReportsPobreportsRoute
   '/reports/sales': typeof AuthenticatedReportsSalesRoute
   '/reports/visit': typeof AuthenticatedReportsVisitRoute
   '/sales/analytics': typeof AuthenticatedSalesAnalyticsRoute
@@ -589,9 +621,13 @@ export interface FileRoutesByTo {
   '/people/doctors': typeof AuthenticatedPeopleDoctorsRoute
   '/people/employees': typeof AuthenticatedPeopleEmployeesRoute
   '/reports/builder': typeof AuthenticatedReportsBuilderRoute
+  '/reports/callreportswithpob': typeof AuthenticatedReportsCallreportswithpobRoute
+  '/reports/dailycallreports': typeof AuthenticatedReportsDailycallreportsRoute
   '/reports/employee': typeof AuthenticatedReportsEmployeeRoute
   '/reports/expense': typeof AuthenticatedReportsExpenseRoute
+  '/reports/hospitalcallreports': typeof AuthenticatedReportsHospitalcallreportsRoute
   '/reports/leave': typeof AuthenticatedReportsLeaveRoute
+  '/reports/pobreports': typeof AuthenticatedReportsPobreportsRoute
   '/reports/sales': typeof AuthenticatedReportsSalesRoute
   '/reports/visit': typeof AuthenticatedReportsVisitRoute
   '/sales/analytics': typeof AuthenticatedSalesAnalyticsRoute
@@ -661,9 +697,13 @@ export interface FileRoutesById {
   '/_authenticated/people/doctors': typeof AuthenticatedPeopleDoctorsRoute
   '/_authenticated/people/employees': typeof AuthenticatedPeopleEmployeesRoute
   '/_authenticated/reports/builder': typeof AuthenticatedReportsBuilderRoute
+  '/_authenticated/reports/callreportswithpob': typeof AuthenticatedReportsCallreportswithpobRoute
+  '/_authenticated/reports/dailycallreports': typeof AuthenticatedReportsDailycallreportsRoute
   '/_authenticated/reports/employee': typeof AuthenticatedReportsEmployeeRoute
   '/_authenticated/reports/expense': typeof AuthenticatedReportsExpenseRoute
+  '/_authenticated/reports/hospitalcallreports': typeof AuthenticatedReportsHospitalcallreportsRoute
   '/_authenticated/reports/leave': typeof AuthenticatedReportsLeaveRoute
+  '/_authenticated/reports/pobreports': typeof AuthenticatedReportsPobreportsRoute
   '/_authenticated/reports/sales': typeof AuthenticatedReportsSalesRoute
   '/_authenticated/reports/visit': typeof AuthenticatedReportsVisitRoute
   '/_authenticated/sales/analytics': typeof AuthenticatedSalesAnalyticsRoute
@@ -733,9 +773,13 @@ export interface FileRouteTypes {
     | '/people/doctors'
     | '/people/employees'
     | '/reports/builder'
+    | '/reports/callreportswithpob'
+    | '/reports/dailycallreports'
     | '/reports/employee'
     | '/reports/expense'
+    | '/reports/hospitalcallreports'
     | '/reports/leave'
+    | '/reports/pobreports'
     | '/reports/sales'
     | '/reports/visit'
     | '/sales/analytics'
@@ -802,9 +846,13 @@ export interface FileRouteTypes {
     | '/people/doctors'
     | '/people/employees'
     | '/reports/builder'
+    | '/reports/callreportswithpob'
+    | '/reports/dailycallreports'
     | '/reports/employee'
     | '/reports/expense'
+    | '/reports/hospitalcallreports'
     | '/reports/leave'
+    | '/reports/pobreports'
     | '/reports/sales'
     | '/reports/visit'
     | '/sales/analytics'
@@ -873,9 +921,13 @@ export interface FileRouteTypes {
     | '/_authenticated/people/doctors'
     | '/_authenticated/people/employees'
     | '/_authenticated/reports/builder'
+    | '/_authenticated/reports/callreportswithpob'
+    | '/_authenticated/reports/dailycallreports'
     | '/_authenticated/reports/employee'
     | '/_authenticated/reports/expense'
+    | '/_authenticated/reports/hospitalcallreports'
     | '/_authenticated/reports/leave'
+    | '/_authenticated/reports/pobreports'
     | '/_authenticated/reports/sales'
     | '/_authenticated/reports/visit'
     | '/_authenticated/sales/analytics'
@@ -1096,11 +1148,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsSalesRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
+    '/_authenticated/reports/pobreports': {
+      id: '/_authenticated/reports/pobreports'
+      path: '/pobreports'
+      fullPath: '/reports/pobreports'
+      preLoaderRoute: typeof AuthenticatedReportsPobreportsRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
     '/_authenticated/reports/leave': {
       id: '/_authenticated/reports/leave'
       path: '/leave'
       fullPath: '/reports/leave'
       preLoaderRoute: typeof AuthenticatedReportsLeaveRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/hospitalcallreports': {
+      id: '/_authenticated/reports/hospitalcallreports'
+      path: '/hospitalcallreports'
+      fullPath: '/reports/hospitalcallreports'
+      preLoaderRoute: typeof AuthenticatedReportsHospitalcallreportsRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/reports/expense': {
@@ -1115,6 +1181,20 @@ declare module '@tanstack/react-router' {
       path: '/employee'
       fullPath: '/reports/employee'
       preLoaderRoute: typeof AuthenticatedReportsEmployeeRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/dailycallreports': {
+      id: '/_authenticated/reports/dailycallreports'
+      path: '/dailycallreports'
+      fullPath: '/reports/dailycallreports'
+      preLoaderRoute: typeof AuthenticatedReportsDailycallreportsRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/callreportswithpob': {
+      id: '/_authenticated/reports/callreportswithpob'
+      path: '/callreportswithpob'
+      fullPath: '/reports/callreportswithpob'
+      preLoaderRoute: typeof AuthenticatedReportsCallreportswithpobRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/reports/builder': {
@@ -1402,9 +1482,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedReportsRouteChildren {
   AuthenticatedReportsBuilderRoute: typeof AuthenticatedReportsBuilderRoute
+  AuthenticatedReportsCallreportswithpobRoute: typeof AuthenticatedReportsCallreportswithpobRoute
+  AuthenticatedReportsDailycallreportsRoute: typeof AuthenticatedReportsDailycallreportsRoute
   AuthenticatedReportsEmployeeRoute: typeof AuthenticatedReportsEmployeeRoute
   AuthenticatedReportsExpenseRoute: typeof AuthenticatedReportsExpenseRoute
+  AuthenticatedReportsHospitalcallreportsRoute: typeof AuthenticatedReportsHospitalcallreportsRoute
   AuthenticatedReportsLeaveRoute: typeof AuthenticatedReportsLeaveRoute
+  AuthenticatedReportsPobreportsRoute: typeof AuthenticatedReportsPobreportsRoute
   AuthenticatedReportsSalesRoute: typeof AuthenticatedReportsSalesRoute
   AuthenticatedReportsVisitRoute: typeof AuthenticatedReportsVisitRoute
   AuthenticatedReportsIndexRoute: typeof AuthenticatedReportsIndexRoute
@@ -1412,9 +1496,16 @@ interface AuthenticatedReportsRouteChildren {
 
 const AuthenticatedReportsRouteChildren: AuthenticatedReportsRouteChildren = {
   AuthenticatedReportsBuilderRoute: AuthenticatedReportsBuilderRoute,
+  AuthenticatedReportsCallreportswithpobRoute:
+    AuthenticatedReportsCallreportswithpobRoute,
+  AuthenticatedReportsDailycallreportsRoute:
+    AuthenticatedReportsDailycallreportsRoute,
   AuthenticatedReportsEmployeeRoute: AuthenticatedReportsEmployeeRoute,
   AuthenticatedReportsExpenseRoute: AuthenticatedReportsExpenseRoute,
+  AuthenticatedReportsHospitalcallreportsRoute:
+    AuthenticatedReportsHospitalcallreportsRoute,
   AuthenticatedReportsLeaveRoute: AuthenticatedReportsLeaveRoute,
+  AuthenticatedReportsPobreportsRoute: AuthenticatedReportsPobreportsRoute,
   AuthenticatedReportsSalesRoute: AuthenticatedReportsSalesRoute,
   AuthenticatedReportsVisitRoute: AuthenticatedReportsVisitRoute,
   AuthenticatedReportsIndexRoute: AuthenticatedReportsIndexRoute,

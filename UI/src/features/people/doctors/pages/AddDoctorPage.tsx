@@ -145,12 +145,18 @@ export function AddDoctorPage() {
 
   const onSubmit = async (values: DoctorFormValues) => {
     try {
-      // Map clinicAddress to District/City/Pincode for data consistency if needed
-      const enrichedValues = {
+      const dataToSave = {
         ...values,
+        registrationNumber: values.registrationNumber || "",
+        doctorCode: values.doctorCode || "",
+        hospitalName: values.hospitalName || "",
         clinicAddress: values.clinicAddress || values.district || "Address Info",
+        speciality: values.speciality || "",
+        category: values.category || "",
+        assignedEmployeeId: values.assignedEmployeeId || "",
+        contact: values.contact || "",
       };
-      await createMutation.mutateAsync(enrichedValues);
+      await createMutation.mutateAsync(dataToSave);
       toast.success("Doctor added successfully");
       window.history.back();
     } catch {
