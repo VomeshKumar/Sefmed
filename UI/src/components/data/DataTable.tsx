@@ -177,7 +177,7 @@ export function DataTable<T>({
                     )}
                     onClick={() => handleSort(col.accessorKey as string, col.sortable)}
                   >
-                    <span className="flex items-center gap-1.5">
+                    <span className="flex items-center gap-1.5 whitespace-nowrap">
                       {col.header}
                       {col.sortable && <SortIcon className="h-3.5 w-3.5 text-muted-foreground" />}
                     </span>

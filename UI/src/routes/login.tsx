@@ -1,13 +1,22 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute, useRouter, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import Cookies from "js-cookie";
 
 export const Route = createFileRoute("/login")({
   head: () => ({ meta: [{ title: "Sign in — SEFMED CRM" }] }),
+  beforeLoad: () => {
+    if (typeof window !== "undefined") {
+      const token = Cookies.get("token");
+      if (token) {
+        throw redirect({ to: "/dashboard" });
+      }
+    }
+  },
   component: Login,
 });
 
@@ -34,9 +43,9 @@ function Login() {
         throw new Error(data.message || "Failed to login");
       }
 
-      // Save to localStorage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // Save to cookies
+      Cookies.set("token", data.token, { secure: true, sameSite: "strict" });
+      Cookies.set("user", JSON.stringify(data.user), { secure: true, sameSite: "strict" });
 
       toast.success("Login successful!");
       

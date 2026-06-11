@@ -28,19 +28,54 @@ export const doctorsApi = {
     territoryId?: string;
     assignedEmployeeId?: string;
   }): Promise<Doctor[]> => {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    let list = getStoredDoctors();
+    const response = await fetch("http://localhost:3000/api/doctors");
+    if (!response.ok) {
+      throw new Error("Failed to fetch doctors");
+    }
+    let list: Doctor[] = await response.json();
+
+    // Map backend snake_case fields to frontend expected fields
+    list = list.map((d: any) => ({
+      id: d.id.toString(),
+      name: d.doctor_name,
+      doctorCode: d.doctor_code,
+      registrationNumber: d.registration_number,
+      hospitalName: d.hospital_name,
+      clinicAddress: d.district || d.city,
+      speciality: d.speciality,
+      category: d.category,
+      assignedEmployeeId: d.assigned_to,
+      contact: d.contact_number,
+      status: "active",
+      zoneId: d.zone,
+      territoryId: d.city,
+      createdAt: d.created_at,
+      qualification: d.qualification,
+      divisionId: d.division,
+      email: d.email,
+      gender: d.gender,
+      dob: d.date_of_birth,
+      anniversary: d.anniversary,
+      type: d.type,
+      firm: d.firm_name,
+      approxBusiness: d.approximated_business ? Number(d.approximated_business) : undefined,
+      prefix: d.prefix,
+      maritalStatus: d.marital_status,
+      district: d.district,
+      pincode: d.pincode,
+      state: d.state,
+    } as any));
 
     if (filters?.query) {
       const q = filters.query.toLowerCase();
       list = list.filter(
         (d) =>
-          d.name.toLowerCase().includes(q) ||
-          d.registrationNumber.toLowerCase().includes(q) ||
-          d.doctorCode.toLowerCase().includes(q) ||
-          d.hospitalName.toLowerCase().includes(q) ||
+          d.name?.toLowerCase().includes(q) ||
+          d.registrationNumber?.toLowerCase().includes(q) ||
+          d.doctorCode?.toLowerCase().includes(q) ||
+          d.hospitalName?.toLowerCase().includes(q) ||
           (d.clinicAddress && d.clinicAddress.toLowerCase().includes(q)) ||
-          d.contact.includes(q),
+          d.contact?.includes(q),
       );
     }
 
@@ -73,17 +108,54 @@ export const doctorsApi = {
     return list.find((d) => d.id === id) || null;
   },
 
-  create: async (data: Omit<Doctor, "id" | "createdAt">): Promise<Doctor> => {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    const list = getStoredDoctors();
-    const newItem: Doctor = {
-      ...data,
-      id: `doc-${Math.random().toString(36).substring(2, 9)}`,
-      createdAt: new Date().toISOString(),
+  create: async (data: any): Promise<Doctor> => {
+    // Map frontend fields to backend expected fields
+    const payload = {
+      doctorCode: data.doctorCode,
+      prefix: data.prefix,
+      doctorName: data.name,
+      hospitalName: data.hospitalName,
+      gender: data.gender,
+      contactNumber: data.contact,
+      email: data.email,
+      dateOfBirth: data.dob,
+      maritalStatus: data.maritalStatus,
+      anniversary: data.anniversary,
+      qualification: data.qualification,
+      state: data.state,
+      division: data.divisionId,
+      zone: data.zoneId,
+      district: data.district,
+      city: data.territoryId, // territoryId is city
+      pincode: data.pincode,
+      speciality: data.speciality,
+      type: data.type,
+      category: data.category,
+      approximatedBusiness: data.approxBusiness?.toString(),
+      assignedTo: data.assignedEmployeeId,
+      firmName: data.firm,
+      registrationNumber: data.registrationNumber
     };
-    list.push(newItem);
-    saveStoredDoctors(list);
-    return newItem;
+
+    const response = await fetch("http://localhost:3000/api/doctors", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to create doctor");
+    }
+
+    const result = await response.json();
+    return {
+      ...data,
+      id: result.doctorId.toString(),
+      createdAt: new Date().toISOString(),
+    } as Doctor;
   },
 
   update: async (

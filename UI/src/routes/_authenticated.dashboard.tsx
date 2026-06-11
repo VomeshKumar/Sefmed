@@ -4,22 +4,25 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { KpiCard } from "@/components/data/KpiCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/data/EmptyState";
+import Cookies from "js-cookie";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — SEFMED CRM" }] }),
   beforeLoad: () => {
-    const userStr = localStorage.getItem("user");
-    if (!userStr) throw redirect({ to: "/login" });
-    
-    let user;
-    try {
-      user = JSON.parse(userStr);
-    } catch (e) {
-      throw redirect({ to: "/login" });
-    }
-    
-    if (user.role !== "admin") {
-      throw redirect({ to: "/reports" });
+    if (typeof window !== "undefined") {
+      const userStr = Cookies.get("user");
+      if (!userStr) throw redirect({ to: "/login" });
+      
+      let user;
+      try {
+        user = JSON.parse(userStr);
+      } catch (e) {
+        throw redirect({ to: "/login" });
+      }
+      
+      if (user.role !== "admin") {
+        throw redirect({ to: "/reports" });
+      }
     }
   },
   component: Dashboard,
