@@ -33,16 +33,38 @@ import { Route as AuthenticatedSalesRateMasterRouteImport } from './routes/_auth
 import { Route as AuthenticatedSalesOrdersRouteImport } from './routes/_authenticated.sales.orders'
 import { Route as AuthenticatedSalesFirmMonthlyRouteImport } from './routes/_authenticated.sales.firm-monthly'
 import { Route as AuthenticatedSalesAnalyticsRouteImport } from './routes/_authenticated.sales.analytics'
+import { Route as AuthenticatedReportsVisitreportlessgreaterRouteImport } from './routes/_authenticated.reports.visitreportlessgreater'
 import { Route as AuthenticatedReportsVisitRouteImport } from './routes/_authenticated.reports.visit'
+import { Route as AuthenticatedReportsShowcallaveragereportRouteImport } from './routes/_authenticated.reports.showcallaveragereport'
+import { Route as AuthenticatedReportsSamplepromotedreportRouteImport } from './routes/_authenticated.reports.samplepromotedreport'
+import { Route as AuthenticatedReportsSampledistributionreportRouteImport } from './routes/_authenticated.reports.sampledistributionreport'
+import { Route as AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRouteImport } from './routes/_authenticated.reports.sampleDistributionWithOpeningAndClosingQty'
+import { Route as AuthenticatedReportsSalestrendreportRouteImport } from './routes/_authenticated.reports.salestrendreport'
 import { Route as AuthenticatedReportsSalesRouteImport } from './routes/_authenticated.reports.sales'
+import { Route as AuthenticatedReportsRoireportRouteImport } from './routes/_authenticated.reports.roireport'
+import { Route as AuthenticatedReportsPresentationreportRouteImport } from './routes/_authenticated.reports.presentationreport'
 import { Route as AuthenticatedReportsPobreportsRouteImport } from './routes/_authenticated.reports.pobreports'
+import { Route as AuthenticatedReportsPaymentcollectionreportRouteImport } from './routes/_authenticated.reports.paymentcollectionreport'
+import { Route as AuthenticatedReportsObjectivereportRouteImport } from './routes/_authenticated.reports.objectivereport'
+import { Route as AuthenticatedReportsMslreportRouteImport } from './routes/_authenticated.reports.mslreport'
 import { Route as AuthenticatedReportsLeaveRouteImport } from './routes/_authenticated.reports.leave'
+import { Route as AuthenticatedReportsLastworkreportRouteImport } from './routes/_authenticated.reports.lastworkreport'
 import { Route as AuthenticatedReportsHospitalcallreportsRouteImport } from './routes/_authenticated.reports.hospitalcallreports'
+import { Route as AuthenticatedReportsGiftdistributionreportRouteImport } from './routes/_authenticated.reports.giftdistributionreport'
 import { Route as AuthenticatedReportsExpenseRouteImport } from './routes/_authenticated.reports.expense'
 import { Route as AuthenticatedReportsEmployeeRouteImport } from './routes/_authenticated.reports.employee'
+import { Route as AuthenticatedReportsDoctormissedRouteImport } from './routes/_authenticated.reports.doctormissed'
+import { Route as AuthenticatedReportsDocotrandfirmcallreportRouteImport } from './routes/_authenticated.reports.docotrandfirmcallreport'
+import { Route as AuthenticatedReportsDiscrepancyreportRouteImport } from './routes/_authenticated.reports.discrepancyreport'
+import { Route as AuthenticatedReportsDatewisecallactivityreportRouteImport } from './routes/_authenticated.reports.datewisecallactivityreport'
+import { Route as AuthenticatedReportsDailyreportclientassignedRouteImport } from './routes/_authenticated.reports.dailyreportclientassigned'
 import { Route as AuthenticatedReportsDailycallreportsRouteImport } from './routes/_authenticated.reports.dailycallreports'
+import { Route as AuthenticatedReportsDailycallreportforlotusRouteImport } from './routes/_authenticated.reports.dailycallreportforlotus'
+import { Route as AuthenticatedReportsConsolidatedemployeereportRouteImport } from './routes/_authenticated.reports.consolidatedemployeereport'
+import { Route as AuthenticatedReportsChemistvisitreportRouteImport } from './routes/_authenticated.reports.chemistvisitreport'
 import { Route as AuthenticatedReportsCallreportswithpobRouteImport } from './routes/_authenticated.reports.callreportswithpob'
 import { Route as AuthenticatedReportsBuilderRouteImport } from './routes/_authenticated.reports.builder'
+import { Route as AuthenticatedReportsActivityreportRouteImport } from './routes/_authenticated.reports.activityreport'
 import { Route as AuthenticatedPeopleEmployeesRouteImport } from './routes/_authenticated.people.employees'
 import { Route as AuthenticatedPeopleDoctorsRouteImport } from './routes/_authenticated.people.doctors'
 import { Route as AuthenticatedPeopleAdministratorsRouteImport } from './routes/_authenticated.people.administrators'
@@ -217,10 +239,48 @@ const AuthenticatedSalesAnalyticsRoute =
     path: '/sales/analytics',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedReportsVisitreportlessgreaterRoute =
+  AuthenticatedReportsVisitreportlessgreaterRouteImport.update({
+    id: '/visitreportlessgreater',
+    path: '/visitreportlessgreater',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
 const AuthenticatedReportsVisitRoute =
   AuthenticatedReportsVisitRouteImport.update({
     id: '/visit',
     path: '/visit',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsShowcallaveragereportRoute =
+  AuthenticatedReportsShowcallaveragereportRouteImport.update({
+    id: '/showcallaveragereport',
+    path: '/showcallaveragereport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsSamplepromotedreportRoute =
+  AuthenticatedReportsSamplepromotedreportRouteImport.update({
+    id: '/samplepromotedreport',
+    path: '/samplepromotedreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsSampledistributionreportRoute =
+  AuthenticatedReportsSampledistributionreportRouteImport.update({
+    id: '/sampledistributionreport',
+    path: '/sampledistributionreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute =
+  AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRouteImport.update(
+    {
+      id: '/sampleDistributionWithOpeningAndClosingQty',
+      path: '/sampleDistributionWithOpeningAndClosingQty',
+      getParentRoute: () => AuthenticatedReportsRoute,
+    } as any,
+  )
+const AuthenticatedReportsSalestrendreportRoute =
+  AuthenticatedReportsSalestrendreportRouteImport.update({
+    id: '/salestrendreport',
+    path: '/salestrendreport',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedReportsSalesRoute =
@@ -229,10 +289,40 @@ const AuthenticatedReportsSalesRoute =
     path: '/sales',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
+const AuthenticatedReportsRoireportRoute =
+  AuthenticatedReportsRoireportRouteImport.update({
+    id: '/roireport',
+    path: '/roireport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsPresentationreportRoute =
+  AuthenticatedReportsPresentationreportRouteImport.update({
+    id: '/presentationreport',
+    path: '/presentationreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
 const AuthenticatedReportsPobreportsRoute =
   AuthenticatedReportsPobreportsRouteImport.update({
     id: '/pobreports',
     path: '/pobreports',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsPaymentcollectionreportRoute =
+  AuthenticatedReportsPaymentcollectionreportRouteImport.update({
+    id: '/paymentcollectionreport',
+    path: '/paymentcollectionreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsObjectivereportRoute =
+  AuthenticatedReportsObjectivereportRouteImport.update({
+    id: '/objectivereport',
+    path: '/objectivereport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsMslreportRoute =
+  AuthenticatedReportsMslreportRouteImport.update({
+    id: '/mslreport',
+    path: '/mslreport',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedReportsLeaveRoute =
@@ -241,10 +331,22 @@ const AuthenticatedReportsLeaveRoute =
     path: '/leave',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
+const AuthenticatedReportsLastworkreportRoute =
+  AuthenticatedReportsLastworkreportRouteImport.update({
+    id: '/lastworkreport',
+    path: '/lastworkreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
 const AuthenticatedReportsHospitalcallreportsRoute =
   AuthenticatedReportsHospitalcallreportsRouteImport.update({
     id: '/hospitalcallreports',
     path: '/hospitalcallreports',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsGiftdistributionreportRoute =
+  AuthenticatedReportsGiftdistributionreportRouteImport.update({
+    id: '/giftdistributionreport',
+    path: '/giftdistributionreport',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedReportsExpenseRoute =
@@ -259,10 +361,58 @@ const AuthenticatedReportsEmployeeRoute =
     path: '/employee',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
+const AuthenticatedReportsDoctormissedRoute =
+  AuthenticatedReportsDoctormissedRouteImport.update({
+    id: '/doctormissed',
+    path: '/doctormissed',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsDocotrandfirmcallreportRoute =
+  AuthenticatedReportsDocotrandfirmcallreportRouteImport.update({
+    id: '/docotrandfirmcallreport',
+    path: '/docotrandfirmcallreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsDiscrepancyreportRoute =
+  AuthenticatedReportsDiscrepancyreportRouteImport.update({
+    id: '/discrepancyreport',
+    path: '/discrepancyreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsDatewisecallactivityreportRoute =
+  AuthenticatedReportsDatewisecallactivityreportRouteImport.update({
+    id: '/datewisecallactivityreport',
+    path: '/datewisecallactivityreport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsDailyreportclientassignedRoute =
+  AuthenticatedReportsDailyreportclientassignedRouteImport.update({
+    id: '/dailyreportclientassigned',
+    path: '/dailyreportclientassigned',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
 const AuthenticatedReportsDailycallreportsRoute =
   AuthenticatedReportsDailycallreportsRouteImport.update({
     id: '/dailycallreports',
     path: '/dailycallreports',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsDailycallreportforlotusRoute =
+  AuthenticatedReportsDailycallreportforlotusRouteImport.update({
+    id: '/dailycallreportforlotus',
+    path: '/dailycallreportforlotus',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsConsolidatedemployeereportRoute =
+  AuthenticatedReportsConsolidatedemployeereportRouteImport.update({
+    id: '/consolidatedemployeereport',
+    path: '/consolidatedemployeereport',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsChemistvisitreportRoute =
+  AuthenticatedReportsChemistvisitreportRouteImport.update({
+    id: '/chemistvisitreport',
+    path: '/chemistvisitreport',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedReportsCallreportswithpobRoute =
@@ -275,6 +425,12 @@ const AuthenticatedReportsBuilderRoute =
   AuthenticatedReportsBuilderRouteImport.update({
     id: '/builder',
     path: '/builder',
+    getParentRoute: () => AuthenticatedReportsRoute,
+  } as any)
+const AuthenticatedReportsActivityreportRoute =
+  AuthenticatedReportsActivityreportRouteImport.update({
+    id: '/activityreport',
+    path: '/activityreport',
     getParentRoute: () => AuthenticatedReportsRoute,
   } as any)
 const AuthenticatedPeopleEmployeesRoute =
@@ -547,16 +703,38 @@ export interface FileRoutesByFullPath {
   '/people/administrators': typeof AuthenticatedPeopleAdministratorsRoute
   '/people/doctors': typeof AuthenticatedPeopleDoctorsRoute
   '/people/employees': typeof AuthenticatedPeopleEmployeesRoute
+  '/reports/activityreport': typeof AuthenticatedReportsActivityreportRoute
   '/reports/builder': typeof AuthenticatedReportsBuilderRoute
   '/reports/callreportswithpob': typeof AuthenticatedReportsCallreportswithpobRoute
+  '/reports/chemistvisitreport': typeof AuthenticatedReportsChemistvisitreportRoute
+  '/reports/consolidatedemployeereport': typeof AuthenticatedReportsConsolidatedemployeereportRoute
+  '/reports/dailycallreportforlotus': typeof AuthenticatedReportsDailycallreportforlotusRoute
   '/reports/dailycallreports': typeof AuthenticatedReportsDailycallreportsRoute
+  '/reports/dailyreportclientassigned': typeof AuthenticatedReportsDailyreportclientassignedRoute
+  '/reports/datewisecallactivityreport': typeof AuthenticatedReportsDatewisecallactivityreportRoute
+  '/reports/discrepancyreport': typeof AuthenticatedReportsDiscrepancyreportRoute
+  '/reports/docotrandfirmcallreport': typeof AuthenticatedReportsDocotrandfirmcallreportRoute
+  '/reports/doctormissed': typeof AuthenticatedReportsDoctormissedRoute
   '/reports/employee': typeof AuthenticatedReportsEmployeeRoute
   '/reports/expense': typeof AuthenticatedReportsExpenseRoute
+  '/reports/giftdistributionreport': typeof AuthenticatedReportsGiftdistributionreportRoute
   '/reports/hospitalcallreports': typeof AuthenticatedReportsHospitalcallreportsRoute
+  '/reports/lastworkreport': typeof AuthenticatedReportsLastworkreportRoute
   '/reports/leave': typeof AuthenticatedReportsLeaveRoute
+  '/reports/mslreport': typeof AuthenticatedReportsMslreportRoute
+  '/reports/objectivereport': typeof AuthenticatedReportsObjectivereportRoute
+  '/reports/paymentcollectionreport': typeof AuthenticatedReportsPaymentcollectionreportRoute
   '/reports/pobreports': typeof AuthenticatedReportsPobreportsRoute
+  '/reports/presentationreport': typeof AuthenticatedReportsPresentationreportRoute
+  '/reports/roireport': typeof AuthenticatedReportsRoireportRoute
   '/reports/sales': typeof AuthenticatedReportsSalesRoute
+  '/reports/salestrendreport': typeof AuthenticatedReportsSalestrendreportRoute
+  '/reports/sampleDistributionWithOpeningAndClosingQty': typeof AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute
+  '/reports/sampledistributionreport': typeof AuthenticatedReportsSampledistributionreportRoute
+  '/reports/samplepromotedreport': typeof AuthenticatedReportsSamplepromotedreportRoute
+  '/reports/showcallaveragereport': typeof AuthenticatedReportsShowcallaveragereportRoute
   '/reports/visit': typeof AuthenticatedReportsVisitRoute
+  '/reports/visitreportlessgreater': typeof AuthenticatedReportsVisitreportlessgreaterRoute
   '/sales/analytics': typeof AuthenticatedSalesAnalyticsRoute
   '/sales/firm-monthly': typeof AuthenticatedSalesFirmMonthlyRoute
   '/sales/orders': typeof AuthenticatedSalesOrdersRoute
@@ -620,16 +798,38 @@ export interface FileRoutesByTo {
   '/people/administrators': typeof AuthenticatedPeopleAdministratorsRoute
   '/people/doctors': typeof AuthenticatedPeopleDoctorsRoute
   '/people/employees': typeof AuthenticatedPeopleEmployeesRoute
+  '/reports/activityreport': typeof AuthenticatedReportsActivityreportRoute
   '/reports/builder': typeof AuthenticatedReportsBuilderRoute
   '/reports/callreportswithpob': typeof AuthenticatedReportsCallreportswithpobRoute
+  '/reports/chemistvisitreport': typeof AuthenticatedReportsChemistvisitreportRoute
+  '/reports/consolidatedemployeereport': typeof AuthenticatedReportsConsolidatedemployeereportRoute
+  '/reports/dailycallreportforlotus': typeof AuthenticatedReportsDailycallreportforlotusRoute
   '/reports/dailycallreports': typeof AuthenticatedReportsDailycallreportsRoute
+  '/reports/dailyreportclientassigned': typeof AuthenticatedReportsDailyreportclientassignedRoute
+  '/reports/datewisecallactivityreport': typeof AuthenticatedReportsDatewisecallactivityreportRoute
+  '/reports/discrepancyreport': typeof AuthenticatedReportsDiscrepancyreportRoute
+  '/reports/docotrandfirmcallreport': typeof AuthenticatedReportsDocotrandfirmcallreportRoute
+  '/reports/doctormissed': typeof AuthenticatedReportsDoctormissedRoute
   '/reports/employee': typeof AuthenticatedReportsEmployeeRoute
   '/reports/expense': typeof AuthenticatedReportsExpenseRoute
+  '/reports/giftdistributionreport': typeof AuthenticatedReportsGiftdistributionreportRoute
   '/reports/hospitalcallreports': typeof AuthenticatedReportsHospitalcallreportsRoute
+  '/reports/lastworkreport': typeof AuthenticatedReportsLastworkreportRoute
   '/reports/leave': typeof AuthenticatedReportsLeaveRoute
+  '/reports/mslreport': typeof AuthenticatedReportsMslreportRoute
+  '/reports/objectivereport': typeof AuthenticatedReportsObjectivereportRoute
+  '/reports/paymentcollectionreport': typeof AuthenticatedReportsPaymentcollectionreportRoute
   '/reports/pobreports': typeof AuthenticatedReportsPobreportsRoute
+  '/reports/presentationreport': typeof AuthenticatedReportsPresentationreportRoute
+  '/reports/roireport': typeof AuthenticatedReportsRoireportRoute
   '/reports/sales': typeof AuthenticatedReportsSalesRoute
+  '/reports/salestrendreport': typeof AuthenticatedReportsSalestrendreportRoute
+  '/reports/sampleDistributionWithOpeningAndClosingQty': typeof AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute
+  '/reports/sampledistributionreport': typeof AuthenticatedReportsSampledistributionreportRoute
+  '/reports/samplepromotedreport': typeof AuthenticatedReportsSamplepromotedreportRoute
+  '/reports/showcallaveragereport': typeof AuthenticatedReportsShowcallaveragereportRoute
   '/reports/visit': typeof AuthenticatedReportsVisitRoute
+  '/reports/visitreportlessgreater': typeof AuthenticatedReportsVisitreportlessgreaterRoute
   '/sales/analytics': typeof AuthenticatedSalesAnalyticsRoute
   '/sales/firm-monthly': typeof AuthenticatedSalesFirmMonthlyRoute
   '/sales/orders': typeof AuthenticatedSalesOrdersRoute
@@ -696,16 +896,38 @@ export interface FileRoutesById {
   '/_authenticated/people/administrators': typeof AuthenticatedPeopleAdministratorsRoute
   '/_authenticated/people/doctors': typeof AuthenticatedPeopleDoctorsRoute
   '/_authenticated/people/employees': typeof AuthenticatedPeopleEmployeesRoute
+  '/_authenticated/reports/activityreport': typeof AuthenticatedReportsActivityreportRoute
   '/_authenticated/reports/builder': typeof AuthenticatedReportsBuilderRoute
   '/_authenticated/reports/callreportswithpob': typeof AuthenticatedReportsCallreportswithpobRoute
+  '/_authenticated/reports/chemistvisitreport': typeof AuthenticatedReportsChemistvisitreportRoute
+  '/_authenticated/reports/consolidatedemployeereport': typeof AuthenticatedReportsConsolidatedemployeereportRoute
+  '/_authenticated/reports/dailycallreportforlotus': typeof AuthenticatedReportsDailycallreportforlotusRoute
   '/_authenticated/reports/dailycallreports': typeof AuthenticatedReportsDailycallreportsRoute
+  '/_authenticated/reports/dailyreportclientassigned': typeof AuthenticatedReportsDailyreportclientassignedRoute
+  '/_authenticated/reports/datewisecallactivityreport': typeof AuthenticatedReportsDatewisecallactivityreportRoute
+  '/_authenticated/reports/discrepancyreport': typeof AuthenticatedReportsDiscrepancyreportRoute
+  '/_authenticated/reports/docotrandfirmcallreport': typeof AuthenticatedReportsDocotrandfirmcallreportRoute
+  '/_authenticated/reports/doctormissed': typeof AuthenticatedReportsDoctormissedRoute
   '/_authenticated/reports/employee': typeof AuthenticatedReportsEmployeeRoute
   '/_authenticated/reports/expense': typeof AuthenticatedReportsExpenseRoute
+  '/_authenticated/reports/giftdistributionreport': typeof AuthenticatedReportsGiftdistributionreportRoute
   '/_authenticated/reports/hospitalcallreports': typeof AuthenticatedReportsHospitalcallreportsRoute
+  '/_authenticated/reports/lastworkreport': typeof AuthenticatedReportsLastworkreportRoute
   '/_authenticated/reports/leave': typeof AuthenticatedReportsLeaveRoute
+  '/_authenticated/reports/mslreport': typeof AuthenticatedReportsMslreportRoute
+  '/_authenticated/reports/objectivereport': typeof AuthenticatedReportsObjectivereportRoute
+  '/_authenticated/reports/paymentcollectionreport': typeof AuthenticatedReportsPaymentcollectionreportRoute
   '/_authenticated/reports/pobreports': typeof AuthenticatedReportsPobreportsRoute
+  '/_authenticated/reports/presentationreport': typeof AuthenticatedReportsPresentationreportRoute
+  '/_authenticated/reports/roireport': typeof AuthenticatedReportsRoireportRoute
   '/_authenticated/reports/sales': typeof AuthenticatedReportsSalesRoute
+  '/_authenticated/reports/salestrendreport': typeof AuthenticatedReportsSalestrendreportRoute
+  '/_authenticated/reports/sampleDistributionWithOpeningAndClosingQty': typeof AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute
+  '/_authenticated/reports/sampledistributionreport': typeof AuthenticatedReportsSampledistributionreportRoute
+  '/_authenticated/reports/samplepromotedreport': typeof AuthenticatedReportsSamplepromotedreportRoute
+  '/_authenticated/reports/showcallaveragereport': typeof AuthenticatedReportsShowcallaveragereportRoute
   '/_authenticated/reports/visit': typeof AuthenticatedReportsVisitRoute
+  '/_authenticated/reports/visitreportlessgreater': typeof AuthenticatedReportsVisitreportlessgreaterRoute
   '/_authenticated/sales/analytics': typeof AuthenticatedSalesAnalyticsRoute
   '/_authenticated/sales/firm-monthly': typeof AuthenticatedSalesFirmMonthlyRoute
   '/_authenticated/sales/orders': typeof AuthenticatedSalesOrdersRoute
@@ -772,16 +994,38 @@ export interface FileRouteTypes {
     | '/people/administrators'
     | '/people/doctors'
     | '/people/employees'
+    | '/reports/activityreport'
     | '/reports/builder'
     | '/reports/callreportswithpob'
+    | '/reports/chemistvisitreport'
+    | '/reports/consolidatedemployeereport'
+    | '/reports/dailycallreportforlotus'
     | '/reports/dailycallreports'
+    | '/reports/dailyreportclientassigned'
+    | '/reports/datewisecallactivityreport'
+    | '/reports/discrepancyreport'
+    | '/reports/docotrandfirmcallreport'
+    | '/reports/doctormissed'
     | '/reports/employee'
     | '/reports/expense'
+    | '/reports/giftdistributionreport'
     | '/reports/hospitalcallreports'
+    | '/reports/lastworkreport'
     | '/reports/leave'
+    | '/reports/mslreport'
+    | '/reports/objectivereport'
+    | '/reports/paymentcollectionreport'
     | '/reports/pobreports'
+    | '/reports/presentationreport'
+    | '/reports/roireport'
     | '/reports/sales'
+    | '/reports/salestrendreport'
+    | '/reports/sampleDistributionWithOpeningAndClosingQty'
+    | '/reports/sampledistributionreport'
+    | '/reports/samplepromotedreport'
+    | '/reports/showcallaveragereport'
     | '/reports/visit'
+    | '/reports/visitreportlessgreater'
     | '/sales/analytics'
     | '/sales/firm-monthly'
     | '/sales/orders'
@@ -845,16 +1089,38 @@ export interface FileRouteTypes {
     | '/people/administrators'
     | '/people/doctors'
     | '/people/employees'
+    | '/reports/activityreport'
     | '/reports/builder'
     | '/reports/callreportswithpob'
+    | '/reports/chemistvisitreport'
+    | '/reports/consolidatedemployeereport'
+    | '/reports/dailycallreportforlotus'
     | '/reports/dailycallreports'
+    | '/reports/dailyreportclientassigned'
+    | '/reports/datewisecallactivityreport'
+    | '/reports/discrepancyreport'
+    | '/reports/docotrandfirmcallreport'
+    | '/reports/doctormissed'
     | '/reports/employee'
     | '/reports/expense'
+    | '/reports/giftdistributionreport'
     | '/reports/hospitalcallreports'
+    | '/reports/lastworkreport'
     | '/reports/leave'
+    | '/reports/mslreport'
+    | '/reports/objectivereport'
+    | '/reports/paymentcollectionreport'
     | '/reports/pobreports'
+    | '/reports/presentationreport'
+    | '/reports/roireport'
     | '/reports/sales'
+    | '/reports/salestrendreport'
+    | '/reports/sampleDistributionWithOpeningAndClosingQty'
+    | '/reports/sampledistributionreport'
+    | '/reports/samplepromotedreport'
+    | '/reports/showcallaveragereport'
     | '/reports/visit'
+    | '/reports/visitreportlessgreater'
     | '/sales/analytics'
     | '/sales/firm-monthly'
     | '/sales/orders'
@@ -920,16 +1186,38 @@ export interface FileRouteTypes {
     | '/_authenticated/people/administrators'
     | '/_authenticated/people/doctors'
     | '/_authenticated/people/employees'
+    | '/_authenticated/reports/activityreport'
     | '/_authenticated/reports/builder'
     | '/_authenticated/reports/callreportswithpob'
+    | '/_authenticated/reports/chemistvisitreport'
+    | '/_authenticated/reports/consolidatedemployeereport'
+    | '/_authenticated/reports/dailycallreportforlotus'
     | '/_authenticated/reports/dailycallreports'
+    | '/_authenticated/reports/dailyreportclientassigned'
+    | '/_authenticated/reports/datewisecallactivityreport'
+    | '/_authenticated/reports/discrepancyreport'
+    | '/_authenticated/reports/docotrandfirmcallreport'
+    | '/_authenticated/reports/doctormissed'
     | '/_authenticated/reports/employee'
     | '/_authenticated/reports/expense'
+    | '/_authenticated/reports/giftdistributionreport'
     | '/_authenticated/reports/hospitalcallreports'
+    | '/_authenticated/reports/lastworkreport'
     | '/_authenticated/reports/leave'
+    | '/_authenticated/reports/mslreport'
+    | '/_authenticated/reports/objectivereport'
+    | '/_authenticated/reports/paymentcollectionreport'
     | '/_authenticated/reports/pobreports'
+    | '/_authenticated/reports/presentationreport'
+    | '/_authenticated/reports/roireport'
     | '/_authenticated/reports/sales'
+    | '/_authenticated/reports/salestrendreport'
+    | '/_authenticated/reports/sampleDistributionWithOpeningAndClosingQty'
+    | '/_authenticated/reports/sampledistributionreport'
+    | '/_authenticated/reports/samplepromotedreport'
+    | '/_authenticated/reports/showcallaveragereport'
     | '/_authenticated/reports/visit'
+    | '/_authenticated/reports/visitreportlessgreater'
     | '/_authenticated/sales/analytics'
     | '/_authenticated/sales/firm-monthly'
     | '/_authenticated/sales/orders'
@@ -1134,11 +1422,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSalesAnalyticsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/reports/visitreportlessgreater': {
+      id: '/_authenticated/reports/visitreportlessgreater'
+      path: '/visitreportlessgreater'
+      fullPath: '/reports/visitreportlessgreater'
+      preLoaderRoute: typeof AuthenticatedReportsVisitreportlessgreaterRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
     '/_authenticated/reports/visit': {
       id: '/_authenticated/reports/visit'
       path: '/visit'
       fullPath: '/reports/visit'
       preLoaderRoute: typeof AuthenticatedReportsVisitRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/showcallaveragereport': {
+      id: '/_authenticated/reports/showcallaveragereport'
+      path: '/showcallaveragereport'
+      fullPath: '/reports/showcallaveragereport'
+      preLoaderRoute: typeof AuthenticatedReportsShowcallaveragereportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/samplepromotedreport': {
+      id: '/_authenticated/reports/samplepromotedreport'
+      path: '/samplepromotedreport'
+      fullPath: '/reports/samplepromotedreport'
+      preLoaderRoute: typeof AuthenticatedReportsSamplepromotedreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/sampledistributionreport': {
+      id: '/_authenticated/reports/sampledistributionreport'
+      path: '/sampledistributionreport'
+      fullPath: '/reports/sampledistributionreport'
+      preLoaderRoute: typeof AuthenticatedReportsSampledistributionreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/sampleDistributionWithOpeningAndClosingQty': {
+      id: '/_authenticated/reports/sampleDistributionWithOpeningAndClosingQty'
+      path: '/sampleDistributionWithOpeningAndClosingQty'
+      fullPath: '/reports/sampleDistributionWithOpeningAndClosingQty'
+      preLoaderRoute: typeof AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/salestrendreport': {
+      id: '/_authenticated/reports/salestrendreport'
+      path: '/salestrendreport'
+      fullPath: '/reports/salestrendreport'
+      preLoaderRoute: typeof AuthenticatedReportsSalestrendreportRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/reports/sales': {
@@ -1148,11 +1478,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsSalesRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
+    '/_authenticated/reports/roireport': {
+      id: '/_authenticated/reports/roireport'
+      path: '/roireport'
+      fullPath: '/reports/roireport'
+      preLoaderRoute: typeof AuthenticatedReportsRoireportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/presentationreport': {
+      id: '/_authenticated/reports/presentationreport'
+      path: '/presentationreport'
+      fullPath: '/reports/presentationreport'
+      preLoaderRoute: typeof AuthenticatedReportsPresentationreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
     '/_authenticated/reports/pobreports': {
       id: '/_authenticated/reports/pobreports'
       path: '/pobreports'
       fullPath: '/reports/pobreports'
       preLoaderRoute: typeof AuthenticatedReportsPobreportsRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/paymentcollectionreport': {
+      id: '/_authenticated/reports/paymentcollectionreport'
+      path: '/paymentcollectionreport'
+      fullPath: '/reports/paymentcollectionreport'
+      preLoaderRoute: typeof AuthenticatedReportsPaymentcollectionreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/objectivereport': {
+      id: '/_authenticated/reports/objectivereport'
+      path: '/objectivereport'
+      fullPath: '/reports/objectivereport'
+      preLoaderRoute: typeof AuthenticatedReportsObjectivereportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/mslreport': {
+      id: '/_authenticated/reports/mslreport'
+      path: '/mslreport'
+      fullPath: '/reports/mslreport'
+      preLoaderRoute: typeof AuthenticatedReportsMslreportRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/reports/leave': {
@@ -1162,11 +1527,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsLeaveRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
+    '/_authenticated/reports/lastworkreport': {
+      id: '/_authenticated/reports/lastworkreport'
+      path: '/lastworkreport'
+      fullPath: '/reports/lastworkreport'
+      preLoaderRoute: typeof AuthenticatedReportsLastworkreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
     '/_authenticated/reports/hospitalcallreports': {
       id: '/_authenticated/reports/hospitalcallreports'
       path: '/hospitalcallreports'
       fullPath: '/reports/hospitalcallreports'
       preLoaderRoute: typeof AuthenticatedReportsHospitalcallreportsRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/giftdistributionreport': {
+      id: '/_authenticated/reports/giftdistributionreport'
+      path: '/giftdistributionreport'
+      fullPath: '/reports/giftdistributionreport'
+      preLoaderRoute: typeof AuthenticatedReportsGiftdistributionreportRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/reports/expense': {
@@ -1183,11 +1562,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsEmployeeRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
+    '/_authenticated/reports/doctormissed': {
+      id: '/_authenticated/reports/doctormissed'
+      path: '/doctormissed'
+      fullPath: '/reports/doctormissed'
+      preLoaderRoute: typeof AuthenticatedReportsDoctormissedRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/docotrandfirmcallreport': {
+      id: '/_authenticated/reports/docotrandfirmcallreport'
+      path: '/docotrandfirmcallreport'
+      fullPath: '/reports/docotrandfirmcallreport'
+      preLoaderRoute: typeof AuthenticatedReportsDocotrandfirmcallreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/discrepancyreport': {
+      id: '/_authenticated/reports/discrepancyreport'
+      path: '/discrepancyreport'
+      fullPath: '/reports/discrepancyreport'
+      preLoaderRoute: typeof AuthenticatedReportsDiscrepancyreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/datewisecallactivityreport': {
+      id: '/_authenticated/reports/datewisecallactivityreport'
+      path: '/datewisecallactivityreport'
+      fullPath: '/reports/datewisecallactivityreport'
+      preLoaderRoute: typeof AuthenticatedReportsDatewisecallactivityreportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/dailyreportclientassigned': {
+      id: '/_authenticated/reports/dailyreportclientassigned'
+      path: '/dailyreportclientassigned'
+      fullPath: '/reports/dailyreportclientassigned'
+      preLoaderRoute: typeof AuthenticatedReportsDailyreportclientassignedRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
     '/_authenticated/reports/dailycallreports': {
       id: '/_authenticated/reports/dailycallreports'
       path: '/dailycallreports'
       fullPath: '/reports/dailycallreports'
       preLoaderRoute: typeof AuthenticatedReportsDailycallreportsRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/dailycallreportforlotus': {
+      id: '/_authenticated/reports/dailycallreportforlotus'
+      path: '/dailycallreportforlotus'
+      fullPath: '/reports/dailycallreportforlotus'
+      preLoaderRoute: typeof AuthenticatedReportsDailycallreportforlotusRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/consolidatedemployeereport': {
+      id: '/_authenticated/reports/consolidatedemployeereport'
+      path: '/consolidatedemployeereport'
+      fullPath: '/reports/consolidatedemployeereport'
+      preLoaderRoute: typeof AuthenticatedReportsConsolidatedemployeereportRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/chemistvisitreport': {
+      id: '/_authenticated/reports/chemistvisitreport'
+      path: '/chemistvisitreport'
+      fullPath: '/reports/chemistvisitreport'
+      preLoaderRoute: typeof AuthenticatedReportsChemistvisitreportRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/reports/callreportswithpob': {
@@ -1202,6 +1637,13 @@ declare module '@tanstack/react-router' {
       path: '/builder'
       fullPath: '/reports/builder'
       preLoaderRoute: typeof AuthenticatedReportsBuilderRouteImport
+      parentRoute: typeof AuthenticatedReportsRoute
+    }
+    '/_authenticated/reports/activityreport': {
+      id: '/_authenticated/reports/activityreport'
+      path: '/activityreport'
+      fullPath: '/reports/activityreport'
+      preLoaderRoute: typeof AuthenticatedReportsActivityreportRouteImport
       parentRoute: typeof AuthenticatedReportsRoute
     }
     '/_authenticated/people/employees': {
@@ -1481,33 +1923,96 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedReportsRouteChildren {
+  AuthenticatedReportsActivityreportRoute: typeof AuthenticatedReportsActivityreportRoute
   AuthenticatedReportsBuilderRoute: typeof AuthenticatedReportsBuilderRoute
   AuthenticatedReportsCallreportswithpobRoute: typeof AuthenticatedReportsCallreportswithpobRoute
+  AuthenticatedReportsChemistvisitreportRoute: typeof AuthenticatedReportsChemistvisitreportRoute
+  AuthenticatedReportsConsolidatedemployeereportRoute: typeof AuthenticatedReportsConsolidatedemployeereportRoute
+  AuthenticatedReportsDailycallreportforlotusRoute: typeof AuthenticatedReportsDailycallreportforlotusRoute
   AuthenticatedReportsDailycallreportsRoute: typeof AuthenticatedReportsDailycallreportsRoute
+  AuthenticatedReportsDailyreportclientassignedRoute: typeof AuthenticatedReportsDailyreportclientassignedRoute
+  AuthenticatedReportsDatewisecallactivityreportRoute: typeof AuthenticatedReportsDatewisecallactivityreportRoute
+  AuthenticatedReportsDiscrepancyreportRoute: typeof AuthenticatedReportsDiscrepancyreportRoute
+  AuthenticatedReportsDocotrandfirmcallreportRoute: typeof AuthenticatedReportsDocotrandfirmcallreportRoute
+  AuthenticatedReportsDoctormissedRoute: typeof AuthenticatedReportsDoctormissedRoute
   AuthenticatedReportsEmployeeRoute: typeof AuthenticatedReportsEmployeeRoute
   AuthenticatedReportsExpenseRoute: typeof AuthenticatedReportsExpenseRoute
+  AuthenticatedReportsGiftdistributionreportRoute: typeof AuthenticatedReportsGiftdistributionreportRoute
   AuthenticatedReportsHospitalcallreportsRoute: typeof AuthenticatedReportsHospitalcallreportsRoute
+  AuthenticatedReportsLastworkreportRoute: typeof AuthenticatedReportsLastworkreportRoute
   AuthenticatedReportsLeaveRoute: typeof AuthenticatedReportsLeaveRoute
+  AuthenticatedReportsMslreportRoute: typeof AuthenticatedReportsMslreportRoute
+  AuthenticatedReportsObjectivereportRoute: typeof AuthenticatedReportsObjectivereportRoute
+  AuthenticatedReportsPaymentcollectionreportRoute: typeof AuthenticatedReportsPaymentcollectionreportRoute
   AuthenticatedReportsPobreportsRoute: typeof AuthenticatedReportsPobreportsRoute
+  AuthenticatedReportsPresentationreportRoute: typeof AuthenticatedReportsPresentationreportRoute
+  AuthenticatedReportsRoireportRoute: typeof AuthenticatedReportsRoireportRoute
   AuthenticatedReportsSalesRoute: typeof AuthenticatedReportsSalesRoute
+  AuthenticatedReportsSalestrendreportRoute: typeof AuthenticatedReportsSalestrendreportRoute
+  AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute: typeof AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute
+  AuthenticatedReportsSampledistributionreportRoute: typeof AuthenticatedReportsSampledistributionreportRoute
+  AuthenticatedReportsSamplepromotedreportRoute: typeof AuthenticatedReportsSamplepromotedreportRoute
+  AuthenticatedReportsShowcallaveragereportRoute: typeof AuthenticatedReportsShowcallaveragereportRoute
   AuthenticatedReportsVisitRoute: typeof AuthenticatedReportsVisitRoute
+  AuthenticatedReportsVisitreportlessgreaterRoute: typeof AuthenticatedReportsVisitreportlessgreaterRoute
   AuthenticatedReportsIndexRoute: typeof AuthenticatedReportsIndexRoute
 }
 
 const AuthenticatedReportsRouteChildren: AuthenticatedReportsRouteChildren = {
+  AuthenticatedReportsActivityreportRoute:
+    AuthenticatedReportsActivityreportRoute,
   AuthenticatedReportsBuilderRoute: AuthenticatedReportsBuilderRoute,
   AuthenticatedReportsCallreportswithpobRoute:
     AuthenticatedReportsCallreportswithpobRoute,
+  AuthenticatedReportsChemistvisitreportRoute:
+    AuthenticatedReportsChemistvisitreportRoute,
+  AuthenticatedReportsConsolidatedemployeereportRoute:
+    AuthenticatedReportsConsolidatedemployeereportRoute,
+  AuthenticatedReportsDailycallreportforlotusRoute:
+    AuthenticatedReportsDailycallreportforlotusRoute,
   AuthenticatedReportsDailycallreportsRoute:
     AuthenticatedReportsDailycallreportsRoute,
+  AuthenticatedReportsDailyreportclientassignedRoute:
+    AuthenticatedReportsDailyreportclientassignedRoute,
+  AuthenticatedReportsDatewisecallactivityreportRoute:
+    AuthenticatedReportsDatewisecallactivityreportRoute,
+  AuthenticatedReportsDiscrepancyreportRoute:
+    AuthenticatedReportsDiscrepancyreportRoute,
+  AuthenticatedReportsDocotrandfirmcallreportRoute:
+    AuthenticatedReportsDocotrandfirmcallreportRoute,
+  AuthenticatedReportsDoctormissedRoute: AuthenticatedReportsDoctormissedRoute,
   AuthenticatedReportsEmployeeRoute: AuthenticatedReportsEmployeeRoute,
   AuthenticatedReportsExpenseRoute: AuthenticatedReportsExpenseRoute,
+  AuthenticatedReportsGiftdistributionreportRoute:
+    AuthenticatedReportsGiftdistributionreportRoute,
   AuthenticatedReportsHospitalcallreportsRoute:
     AuthenticatedReportsHospitalcallreportsRoute,
+  AuthenticatedReportsLastworkreportRoute:
+    AuthenticatedReportsLastworkreportRoute,
   AuthenticatedReportsLeaveRoute: AuthenticatedReportsLeaveRoute,
+  AuthenticatedReportsMslreportRoute: AuthenticatedReportsMslreportRoute,
+  AuthenticatedReportsObjectivereportRoute:
+    AuthenticatedReportsObjectivereportRoute,
+  AuthenticatedReportsPaymentcollectionreportRoute:
+    AuthenticatedReportsPaymentcollectionreportRoute,
   AuthenticatedReportsPobreportsRoute: AuthenticatedReportsPobreportsRoute,
+  AuthenticatedReportsPresentationreportRoute:
+    AuthenticatedReportsPresentationreportRoute,
+  AuthenticatedReportsRoireportRoute: AuthenticatedReportsRoireportRoute,
   AuthenticatedReportsSalesRoute: AuthenticatedReportsSalesRoute,
+  AuthenticatedReportsSalestrendreportRoute:
+    AuthenticatedReportsSalestrendreportRoute,
+  AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute:
+    AuthenticatedReportsSampleDistributionWithOpeningAndClosingQtyRoute,
+  AuthenticatedReportsSampledistributionreportRoute:
+    AuthenticatedReportsSampledistributionreportRoute,
+  AuthenticatedReportsSamplepromotedreportRoute:
+    AuthenticatedReportsSamplepromotedreportRoute,
+  AuthenticatedReportsShowcallaveragereportRoute:
+    AuthenticatedReportsShowcallaveragereportRoute,
   AuthenticatedReportsVisitRoute: AuthenticatedReportsVisitRoute,
+  AuthenticatedReportsVisitreportlessgreaterRoute:
+    AuthenticatedReportsVisitreportlessgreaterRoute,
   AuthenticatedReportsIndexRoute: AuthenticatedReportsIndexRoute,
 }
 

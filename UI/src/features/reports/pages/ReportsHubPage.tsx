@@ -223,10 +223,32 @@ export function ReportsHubPage() {
                   </div>
                 ) : (
                   cat.reports.map((report) => {
-                    const isCallReport = report.title === "Call Report";
+                     const isCallReport = report.title === "Call Report";
                     const isHospitalCallReport = report.title === "Hospital Call Report";
                     const isPobReport = report.title === "POB Report";
                     const isPobCallReport = report.title === "Call Report With POB";
+                    const isObjectiveReport = report.title === "Objective Wise Call Report";
+                    const isDailyCallReport = report.title === "Daily Call Report";
+                    const isDoctorCoverageReport = report.title === "Doctor Coverage Report";
+                    const isDiscrepancyReport = report.title === "Discrepancy Report";
+                    const isVisitReport = report.title === "Visit Report";
+                    const isDoctorsAttendedMissedReport = report.title === "Doctors Attended & Missed Report";
+                    const isFirmVisitReport = report.title === "Firm Visit Report";
+                    const isDcrReport = report.title === "DCR Report";
+                    const isMslReport = report.title === "MSL Report";
+                    const isSampleDistributionReport = report.title === "Sample Distribution Report";
+                    const isSampleDistributionWithOpeningAndClosingQtyReport = report.title === "Sample Distribution Report With Opening And Closing Quantity";
+                    const isGiftDistributionReport = report.title === "Gift Distribution Report";
+                    const isConsolidatedEmployeeReport = report.title === "Consolidated Employee Wise Report";
+                    const isLastWorkReport = report.title === "Last Work Report";
+                    const isActivityReport = report.title === "Activity Report";
+                    const isPresentationReport = report.title === "Presentation Report";
+                    const isPaymentCollectionReport = report.title === "Payment Collection Report";
+                    const isSamplePromotedReport = report.title === "Sample Promoted Report";
+                    const isSalesTrendReport = report.title === "Sales Trend Report";
+                    const isDateWiseCallActivityReport = report.title === "Date Wise Call Activity Report";
+                    const isCallAverageReport = report.title === "Call Average Report";
+                    const isRoiReport = report.title === "ROI Report";
                     return (
                       <Link
                         key={report.id}
@@ -239,10 +261,54 @@ export function ReportsHubPage() {
                             ? "/reports/pobreports"
                             : isPobCallReport
                             ? "/reports/callreportswithpob"
+                            : isObjectiveReport
+                            ? "/reports/objectivereport"
+                            : isDailyCallReport
+                            ? "/reports/dailycallreportforlotus"
+                            : isDoctorCoverageReport
+                            ? "/reports/dailyreportclientassigned"
+                            : isDiscrepancyReport
+                            ? "/reports/discrepancyreport"
+                            : isVisitReport
+                            ? "/reports/visitreportlessgreater"
+                            : isDoctorsAttendedMissedReport
+                            ? "/reports/doctormissed"
+                            : isFirmVisitReport
+                            ? "/reports/chemistvisitreport"
+                            : isDcrReport
+                            ? "/reports/docotrandfirmcallreport"
+                            : isMslReport
+                            ? "/reports/mslreport"
+                            : isSampleDistributionReport
+                            ? "/reports/sampledistributionreport"
+                            : isSampleDistributionWithOpeningAndClosingQtyReport
+                            ? "/reports/sampleDistributionWithOpeningAndClosingQty"
+                            : isGiftDistributionReport
+                            ? "/reports/giftdistributionreport"
+                            : isConsolidatedEmployeeReport
+                            ? "/reports/consolidatedemployeereport"
+                            : isLastWorkReport
+                            ? "/reports/lastworkreport"
+                            : isActivityReport
+                            ? "/reports/activityreport"
+                            : isPresentationReport
+                            ? "/reports/presentationreport"
+                            : isPaymentCollectionReport
+                            ? "/reports/paymentcollectionreport"
+                            : isSamplePromotedReport
+                            ? "/reports/samplepromotedreport"
+                            : isSalesTrendReport
+                            ? "/reports/salestrendreport"
+                            : isDateWiseCallActivityReport
+                            ? "/reports/datewisecallactivityreport"
+                            : isCallAverageReport
+                            ? "/reports/showcallaveragereport"
+                            : isRoiReport
+                            ? "/reports/roireport"
                             : "/reports/builder"
                         }
                         search={
-                          (isCallReport || isHospitalCallReport || isPobReport || isPobCallReport)
+                          (isCallReport || isHospitalCallReport || isPobReport || isPobCallReport || isObjectiveReport || isDailyCallReport || isDoctorCoverageReport || isDiscrepancyReport || isVisitReport || isDoctorsAttendedMissedReport || isFirmVisitReport || isDcrReport || isMslReport || isSampleDistributionReport || isSampleDistributionWithOpeningAndClosingQtyReport || isGiftDistributionReport || isConsolidatedEmployeeReport || isLastWorkReport || isActivityReport || isPresentationReport || isPaymentCollectionReport || isSamplePromotedReport || isSalesTrendReport || isDateWiseCallActivityReport || isCallAverageReport || isRoiReport)
                             ? undefined
                             : {
                                 module: report.module,
